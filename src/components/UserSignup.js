@@ -5,35 +5,54 @@ import { isEmail } from 'validator';
 const UserSignup = (props) => {
   
   const USER_SIGNUP_URL = 'http://localhost:1337/user/signup';
-
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [suburb, setSuburb] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [blankFieldMessage, setBlankFieldMessage] = useState('');
-  const [emailValidationMessage, setEmailValidationMessage] = useState('');
   
-  const handleNameInput = (e) => {
-    setName(e.target.value);
-  }; // handleNameInput
+  const [state, setState] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    suburb: '',
+    errorMessage: '',
+    blankFieldMessage: '',
+    emailValidationMessage: ''
+  });
   
-  const handleEmailInput = (e) => {
-    setEmail(e.target.value);
-  }; // handleEmailInput
-
-  const handlePasswordInput = (e) => {
-    setPassword(e.target.value);
-  }; // handlePasswordInput
-
-  const handleConfirmPasswordInput = (e) => {
-    setConfirmPassword(e.target.value);
-  }; // handleConfirmPasswordInput
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [confirmPassword, setConfirmPassword] = useState('');
+  // const [suburb, setSuburb] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('');
+  // const [blankFieldMessage, setBlankFieldMessage] = useState('');
+  // const [emailValidationMessage, setEmailValidationMessage] = useState('');
   
-  const handleSuburbInput = (e) => {
-    setSuburb(e.target.value);
-  }; // handleConfirmPasswordInput
+  // const handleNameInput = (e) => {
+  //   setName(e.target.value);
+  // }; // handleNameInput
+  
+  // const handleEmailInput = (e) => {
+  //   setEmail(e.target.value);
+  // }; // handleEmailInput
+
+  // const handlePasswordInput = (e) => {
+  //   setPassword(e.target.value);
+  // }; // handlePasswordInput
+
+  // const handleConfirmPasswordInput = (e) => {
+  //   setConfirmPassword(e.target.value);
+  // }; // handleConfirmPasswordInput
+  
+  // const handleSuburbInput = (e) => {
+  //   setSuburb(e.target.value);
+  // }; // handleConfirmPasswordInput
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setState({
+      ...state,
+      [e.target.name]: value
+    })
+  };
   
   const emailValidation = value => {
     if (isEmail(value)) {
@@ -45,27 +64,27 @@ const UserSignup = (props) => {
   
   const handleSignup = (e) => {
     e.preventDefault();
-    setErrorMessage('');
-    setBlankFieldMessage('');
-    setEmailValidationMessage('');
+    setState({...state, blankFieldMessage: ''});
+    setState({...state, emailValidationMessage: ''});
+    setState({...state, errorMessage: ''});
     console.log('Signup Submitted');
-    if (name === '' || email === '' || password === '' || suburb === '') {
-      setBlankFieldMessage('Fields can"t be blank.');
+    if (state.name === '' || state.email === '' || state.password === '' || state.suburb === '') {
+      setState({...state, blankFieldMessage: 'Fields can"t be blank.'});
       return;
     }
-    if (!emailValidation(email)) {
-      setEmailValidationMessage('Invalid email.');
+    if (!emailValidation(state.email)) {
+      setState({...state, emailValidationMessage: 'Invalid email.'});
       return;
     }
-    if (password !== confirmPassword) {
-      setErrorMessage('Please make sure your passwords match.');
+    if (state.password !== state.confirmPassword) {
+      setState({...state, errorMessage: 'Please make sure your passwords match.'});
       return;
     }
     axios.post(USER_SIGNUP_URL, {
-        name: name,
-        email: email,
-        password: password,
-        suburb: suburb
+      name: state.name,
+      email: state.email,
+      password: state.password,
+      suburb: state.suburb
     })
     .then(res => {
       console.log(res.data);
@@ -73,10 +92,7 @@ const UserSignup = (props) => {
       props.history.push('/home');
       window.location.reload();
     })
-    .catch(err => {
-      console.log(err);
-    }); // axios.post
-
+    .catch(err => {console.log(err);}); // axios.post
   }; // handleSignup
   
   return(
@@ -84,25 +100,25 @@ const UserSignup = (props) => {
       <h1>User Signup</h1>
       <form>
         <label>Name:</label>
-        <input type="text" onChange={handleNameInput} />
+        <input type="text" name="name" onChange={handleChange} />
         <label>Email:</label>
-        <input type="text" name="email" value={email} onChange={handleEmailInput} />
+        <input type="text" name="email" onChange={handleChange} />
         <label>Password:</label>
-        <input type="text" onChange={handlePasswordInput}/>
+        <input type="text" name="password" onChange={handleChange}/>
         <label>Confirm Password:</label>
-        <input type="text" onChange={handleConfirmPasswordInput}/>
+        <input type="text" name="confirmPassword" onChange={handleChange}/>
         {/* TODO: Sydney suburbs API */}
         <label>Suburb:</label>
-        <input type="text" onChange={handleSuburbInput}/>
+        <input type="text" name="suburb" onChange={handleChange}/>
         <input type="Submit" placeholder="Login" onClick={handleSignup} />
       </form>
       <div className="errorMessage">
-        <p>{errorMessage}</p>
-        <p>{blankFieldMessage}</p>
-        <p>{emailValidationMessage}</p>
+        <p>{state.errorMessage}</p>
+        <p>{state.blankFieldMessage}</p>
+        <p>{state.emailValidationMessage}</p>
       </div>
     </div>
-  )
+  ) // return
 }; // UserSignup
 
 export default UserSignup

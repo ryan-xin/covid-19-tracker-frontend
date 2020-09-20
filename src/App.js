@@ -10,6 +10,7 @@ import Cases from './components/Cases';
 
 const App = (props) => {
   
+  // TODO: Make this available to all components
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentAdmin, setCurrentAdmin] = useState(undefined);
 
@@ -65,7 +66,7 @@ const App = (props) => {
       </div>
       
     </div>
-  )
-}
+  ) // return
+}; // App
 
 export default App;

@@ -6,7 +6,7 @@ const Home = (props) => {
     <div>
       <h1>Home</h1>
     </div>
-  )
+  ) // return
 }; // Home
 
 export default Home;

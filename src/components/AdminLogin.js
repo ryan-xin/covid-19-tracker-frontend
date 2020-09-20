@@ -51,7 +51,7 @@ const AdminLogin = (props) => {
         <p>{errorMessage}</p>
       </div>
     </div>
-  )  
+  ) // return
   
 }; //AdminLogin
 
