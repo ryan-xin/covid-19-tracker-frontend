@@ -42,7 +42,7 @@ const CreateCase = (props) => {
       setState({...state, fieldValidationMessage: 'Invalid year field.'});
       return false;
     }
-    const timeRegex = /(1[012]|[1-9]):[0-5][0-9](am|pm)$/;
+    const timeRegex = /\b(1[012]|[1-9]):[0-5][0-9](am|pm)$\b/;
     if (!timeRegex.test(state.startTime) || !timeRegex.test(state.endTime)) {
       setState({...state, fieldValidationMessage: 'Invalid time field.'});
       return false;
