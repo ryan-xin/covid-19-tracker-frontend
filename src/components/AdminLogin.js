@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const UserLogin = (props) => {
-  
-  const USER_LOGIN_URL = 'http://localhost:1337/user/login';
+const AdminLogin = (props) => {
+  const ADMIN_LOGIN_URL = 'http://localhost:1337/admin/login';
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  
+
   const handleEmailInput = (e) => {
     setEmail(e.target.value);
   }; // handleEmailInput
@@ -20,14 +19,14 @@ const UserLogin = (props) => {
   const handleLogin = (e) => {
     e.preventDefault();
     console.log('Login Submitted');
-    axios.post(USER_LOGIN_URL, {
+    axios.post(ADMIN_LOGIN_URL, {
       email: email,
       password: password
     })
     .then(res => {
       console.log(res.data);
-      localStorage.setItem('user', JSON.stringify(res.data));
-      props.history.push('/home');
+      localStorage.setItem('admin', JSON.stringify(res.data));
+      props.history.push('/cases');
       window.location.reload();
     })
     .catch(err => {
@@ -40,7 +39,7 @@ const UserLogin = (props) => {
   
   return(
     <div>
-      <h1>User Login</h1>
+      <h1>Admin Login</h1>
       <form>
         <label>Email:</label>
         <input type="text" onChange={handleEmailInput}/>
@@ -52,7 +51,8 @@ const UserLogin = (props) => {
         <p>{errorMessage}</p>
       </div>
     </div>
-  )
-}; // UserLogin
+  )  
+  
+}; //AdminLogin
 
-export default UserLogin;
+export default AdminLogin;

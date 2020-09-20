@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
+import { isEmail } from 'validator';
 
 const UserSignup = (props) => {
   
-  const USER_SIGNUP_URL = "http://localhost:1337/user/signup";
+  const USER_SIGNUP_URL = 'http://localhost:1337/user/signup';
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -72,8 +69,8 @@ const UserSignup = (props) => {
     })
     .then(res => {
       console.log(res.data);
-      localStorage.setItem("user", JSON.stringify(res.data));
-      props.history.push("/home");
+      localStorage.setItem('user', JSON.stringify(res.data));
+      props.history.push('/home');
       window.location.reload();
     })
     .catch(err => {
@@ -94,6 +91,7 @@ const UserSignup = (props) => {
         <input type="text" onChange={handlePasswordInput}/>
         <label>Confirm Password:</label>
         <input type="text" onChange={handleConfirmPasswordInput}/>
+        {/* TODO: Sydney suburbs API */}
         <label>Suburb:</label>
         <input type="text" onChange={handleSuburbInput}/>
         <input type="Submit" placeholder="Login" onClick={handleSignup} />
