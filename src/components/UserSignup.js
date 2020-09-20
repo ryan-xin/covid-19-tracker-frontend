@@ -15,6 +15,8 @@ const UserSignup = (props) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [suburb, setSuburb] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [blankFieldMessage, setBlankFieldMessage] = useState('');
+  const [emailValidationMessage, setEmailValidationMessage] = useState('');
   
   const handleNameInput = (e) => {
     setName(e.target.value);
@@ -35,29 +37,49 @@ const UserSignup = (props) => {
   const handleSuburbInput = (e) => {
     setSuburb(e.target.value);
   }; // handleConfirmPasswordInput
-    
+  
+  const emailValidation = value => {
+    if (isEmail(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  
   const handleSignup = (e) => {
     e.preventDefault();
+    setErrorMessage('');
+    setBlankFieldMessage('');
+    setEmailValidationMessage('');
     console.log('Signup Submitted');
-    if (password === confirmPassword) {
-      axios.post(USER_SIGNUP_URL, {
-          name: name,
-          email: email,
-          password: password,
-          suburb: suburb
-      })
-      .then(res => {
-        console.log(res.data);
-        localStorage.setItem("user", JSON.stringify(res.data));
-        props.history.push("/home");
-        window.location.reload();
-      })
-      .catch(err => {
-        console.log(err);
-      }); // axios.post
-    } else {
-      setErrorMessage('Please make sure your passwords match.')
+    if (name === '' || email === '' || password === '' || suburb === '') {
+      setBlankFieldMessage('Fields can"t be blank.');
+      return;
     }
+    if (!emailValidation(email)) {
+      setEmailValidationMessage('Invalid email.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      setErrorMessage('Please make sure your passwords match.');
+      return;
+    }
+    axios.post(USER_SIGNUP_URL, {
+        name: name,
+        email: email,
+        password: password,
+        suburb: suburb
+    })
+    .then(res => {
+      console.log(res.data);
+      localStorage.setItem("user", JSON.stringify(res.data));
+      props.history.push("/home");
+      window.location.reload();
+    })
+    .catch(err => {
+      console.log(err);
+    }); // axios.post
+
   }; // handleSignup
   
   return(
@@ -65,9 +87,9 @@ const UserSignup = (props) => {
       <h1>User Signup</h1>
       <form>
         <label>Name:</label>
-        <input type="text" onChange={handleNameInput}/>
+        <input type="text" onChange={handleNameInput} />
         <label>Email:</label>
-        <input type="text" onChange={handleEmailInput}/>
+        <input type="text" name="email" value={email} onChange={handleEmailInput} />
         <label>Password:</label>
         <input type="text" onChange={handlePasswordInput}/>
         <label>Confirm Password:</label>
@@ -78,6 +100,8 @@ const UserSignup = (props) => {
       </form>
       <div className="errorMessage">
         <p>{errorMessage}</p>
+        <p>{blankFieldMessage}</p>
+        <p>{emailValidationMessage}</p>
       </div>
     </div>
   )
