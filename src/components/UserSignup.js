@@ -1,0 +1,86 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
+import { isEmail } from "validator";
+
+const UserSignup = (props) => {
+  
+  const USER_SIGNUP_URL = "http://localhost:1337/user/signup";
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [suburb, setSuburb] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  
+  const handleNameInput = (e) => {
+    setName(e.target.value);
+  }; // handleNameInput
+  
+  const handleEmailInput = (e) => {
+    setEmail(e.target.value);
+  }; // handleEmailInput
+
+  const handlePasswordInput = (e) => {
+    setPassword(e.target.value);
+  }; // handlePasswordInput
+
+  const handleConfirmPasswordInput = (e) => {
+    setConfirmPassword(e.target.value);
+  }; // handleConfirmPasswordInput
+  
+  const handleSuburbInput = (e) => {
+    setSuburb(e.target.value);
+  }; // handleConfirmPasswordInput
+    
+  const handleSignup = (e) => {
+    e.preventDefault();
+    console.log('Signup Submitted');
+    if (password === confirmPassword) {
+      axios.post(USER_SIGNUP_URL, {
+          name: name,
+          email: email,
+          password: password,
+          suburb: suburb
+      })
+      .then(res => {
+        console.log(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data));
+        props.history.push("/home");
+        window.location.reload();
+      })
+      .catch(err => {
+        console.log(err);
+      }); // axios.post
+    } else {
+      setErrorMessage('Please make sure your passwords match.')
+    }
+  }; // handleSignup
+  
+  return(
+    <div>
+      <h1>User Signup</h1>
+      <form>
+        <label>Name:</label>
+        <input type="text" onChange={handleNameInput}/>
+        <label>Email:</label>
+        <input type="text" onChange={handleEmailInput}/>
+        <label>Password:</label>
+        <input type="text" onChange={handlePasswordInput}/>
+        <label>Confirm Password:</label>
+        <input type="text" onChange={handleConfirmPasswordInput}/>
+        <label>Suburb:</label>
+        <input type="text" onChange={handleSuburbInput}/>
+        <input type="Submit" placeholder="Login" onClick={handleSignup} />
+      </form>
+      <div className="errorMessage">
+        <p>{errorMessage}</p>
+      </div>
+    </div>
+  )
+}; // UserSignup
+
+export default UserSignup

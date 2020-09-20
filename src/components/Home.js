@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const UserPortal = (props) => {
+const Home = (props) => {
   return(
     <div>
-      <h1>Welcome</h1>
+      <h1>Home</h1>
     </div>
   )
-}; // UserLogin
+}; // Home
 
-export default UserPortal;
+export default Home;
