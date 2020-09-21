@@ -16,35 +16,6 @@ const UserSignup = (props) => {
     blankFieldMessage: '',
     emailValidationMessage: ''
   });
-  
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [confirmPassword, setConfirmPassword] = useState('');
-  // const [suburb, setSuburb] = useState('');
-  // const [errorMessage, setErrorMessage] = useState('');
-  // const [blankFieldMessage, setBlankFieldMessage] = useState('');
-  // const [emailValidationMessage, setEmailValidationMessage] = useState('');
-  
-  // const handleNameInput = (e) => {
-  //   setName(e.target.value);
-  // }; // handleNameInput
-  
-  // const handleEmailInput = (e) => {
-  //   setEmail(e.target.value);
-  // }; // handleEmailInput
-
-  // const handlePasswordInput = (e) => {
-  //   setPassword(e.target.value);
-  // }; // handlePasswordInput
-
-  // const handleConfirmPasswordInput = (e) => {
-  //   setConfirmPassword(e.target.value);
-  // }; // handleConfirmPasswordInput
-  
-  // const handleSuburbInput = (e) => {
-  //   setSuburb(e.target.value);
-  // }; // handleConfirmPasswordInput
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -92,7 +63,13 @@ const UserSignup = (props) => {
       props.history.push('/home');
       window.location.reload();
     })
-    .catch(err => {console.log(err);}); // axios.post
+    .catch(err => {
+      console.dir(err);
+      if (err.response.status === 401) {
+        console.log(err.response.data.email);
+        setState({...state, errorMessage: err.response.data.email});
+      }
+    }); // axios.post
   }; // handleSignup
   
   return(

@@ -51,8 +51,9 @@ const CreateCase = (props) => {
   };
   
   const handleCreate = (e) => {
-    console.log('Case create submitted');
     e.preventDefault();
+    console.log('Case create submitted');
+    const admin = JSON.parse(localStorage.getItem('admin'));
     if (formValidation()) {
       axios.post(CREATE_CASE_URL, {
         suburb: state.suburb,
@@ -61,7 +62,8 @@ const CreateCase = (props) => {
         month: state.month,
         year: state.year,
         startTime: state.startTime,
-        endTime: state.endTime
+        endTime: state.endTime,
+        adminID: admin.admin._id
       })
       .then(res => {
         console.log(res.data);
