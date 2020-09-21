@@ -54,6 +54,7 @@ const AdminProfile = (props) => {
             <div>{c.day}</div>
             <div>{c.startTime}</div>
             <div></div>
+            <Link to={`/cases/edit/${c._id}`}>Edit</Link>
             <div id={c._id} onClick={handleDelete}>Delete</div>
           </div>
         )})

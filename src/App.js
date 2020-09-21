@@ -5,8 +5,9 @@ import UserLogin from './components/UserLogin';
 import UserSignup from './components/UserSignup';
 import AdminLogin from './components/AdminLogin';
 import Home from './components/Home';
-import CreateCase from './components/CreateCase';
 import Cases from './components/Cases';
+import CreateCase from './components/CreateCase';
+import EditCase from './components/EditCase';
 import AdminProfile from './components/AdminProfile';
 import axios from 'axios';
 
@@ -69,6 +70,7 @@ const App = (props) => {
           <Route exact path='/admin/profile/:adminId' component={AdminProfile} />
           <Route exact path='/cases' component={Cases} />
           <Route exact path='/cases/create' component={CreateCase} />
+          <Route exact path='/cases/edit/:caseId' component={EditCase} />
           <div>
             <hr />
             <footer>

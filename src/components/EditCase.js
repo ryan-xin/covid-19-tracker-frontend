@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const CreateCase = (props) => {
+const EditCase = (props) => {
   
-  const CREATE_CASE_URL = 'http://localhost:1337/cases/create';
+  const SINGLE_CASE_URL = 'http://localhost:1337/cases';
+  const EDIT_CASE_URL = 'http://localhost:1337/cases/edit';
   const ALL_SUBURBS_URL = 'http://localhost:1337/suburbs';
 
   const [state, setState] = useState({
@@ -25,7 +26,7 @@ const CreateCase = (props) => {
       ...state,
       [e.target.name]: value
     });
-  };
+  }; // handleChange
   
   const formValidation = (e) => {
     setState({...state, blankFieldMessage: ''});
@@ -50,14 +51,12 @@ const CreateCase = (props) => {
       return false;
     }
     return true;
-  };
+  };  
   
-  const handleCreate = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
-    console.log('Case create submitted');
-    const admin = JSON.parse(localStorage.getItem('admin'));
     if (formValidation()) {
-      axios.post(CREATE_CASE_URL, {
+      axios.post(EDIT_CASE_URL, {
         suburb: state.suburb,
         location: state.location,
         day: state.day,
@@ -65,7 +64,7 @@ const CreateCase = (props) => {
         year: state.year,
         startTime: state.startTime,
         endTime: state.endTime,
-        adminID: admin._id
+        caseId: props.match.params.caseId
       })
       .then(res => {
         console.log(res.data);
@@ -74,9 +73,10 @@ const CreateCase = (props) => {
         // window.location.reload();
       })
       .catch(err => console.log(err)); // axios post
-    }
-  }; // handleCreate
-  
+    }    
+    console.log('Edit case executed');
+  }; // handleUpdate
+    
   useEffect(() => {
     axios.get(ALL_SUBURBS_URL)
     .then(res => {
@@ -84,11 +84,25 @@ const CreateCase = (props) => {
       setState({...state, suburbs: res.data});      
     })
     .catch(err => console.log(err));
+    
+    // console.log(props.match.params.caseId);
+    // axios.get(`${SINGLE_CASE_URL}/${props.match.params.caseId}`)
+    // .then(res => {
+    //   console.log(res.data.singleCase);
+    //   // setState({...state, suburb: res.data.singleCase.suburb});      
+    //   setState({...state, location: res.data.singleCase.location});      
+    //   setState({...state, day: res.data.singleCase.day});      
+    //   // setState({...state, month: res.data.singleCase.month});      
+    //   setState({...state, year: res.data.singleCase.year});      
+    //   setState({...state, startTime: res.data.singleCase.startTime});      
+    //   setState({...state, endTime: res.data.singleCase.endTime});      
+    // })
+    // .catch(err => console.log(err));
   }, []); // useEffect
   
   return(
     <div>
-      <h1>Create New Case</h1>
+      <h1>Edit Case</h1>
       <form>
         <label>Suburb:</label>
         <select type="text" name="suburb" placeholder="e.g. Sydney" onChange={handleChange}>
@@ -100,9 +114,9 @@ const CreateCase = (props) => {
           }
         </select>
         <label>Location:</label>
-        <input type="text" name="location" placeholder="e.g. Shopping Mall" onChange={handleChange} />
+        <input type="text" name="location" placeholder="e.g. Shopping Mall" onChange={handleChange} defaultValue={state.location} />
         <label>Day:</label>
-        <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange}/>
+        <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange} defaultValue={state.day} />
         <label>Month:</label>
         <select type="text" name="month" placeholder="e.g. January" onChange={handleChange}>
           <option value="">Select...</option>
@@ -120,12 +134,12 @@ const CreateCase = (props) => {
           <option value="December">December</option>
         </select>
         <label>Year:</label>
-        <input type="text" name="year" placeholder="e.g. 2020" onChange={handleChange}/>
+        <input type="text" name="year" placeholder="e.g. 2020" onChange={handleChange} defaultValue={state.year} />
         <label>Start Time:</label>
-        <input type="text" name="startTime" placeholder="e.g. 11:00am" onChange={handleChange}/>
+        <input type="text" name="startTime" placeholder="e.g. 11:00am" onChange={handleChange} defaultValue={state.startTime} />
         <label>End Time:</label>
-        <input type="text" name="endTime" placeholder="e.g. 2:00pm" onChange={handleChange}/>
-        <input type="Submit" placeholder="Create" onClick={handleCreate} />        
+        <input type="text" name="endTime" placeholder="e.g. 2:00pm" onChange={handleChange} defaultValue={state.endTime} />
+        <input type="Submit" placeholder="Create" onClick={handleUpdate} />        
       </form>
       <div className="errorMessage">
         <p>{state.blankFieldMessage}</p>
@@ -133,6 +147,7 @@ const CreateCase = (props) => {
       </div>
     </div>
   ); // return
-}; // Cases
+  
+}; // EditCase
 
-export default CreateCase;
+export default EditCase;
