@@ -15,6 +15,7 @@ const App = (props) => {
   // TODO: Make this available to all components
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentAdmin, setCurrentAdmin] = useState(undefined);
+  const [readyToRoute, setReadyToRoute] = useState(false);
 
   const logout = (e) => {
     localStorage.removeItem('user');
@@ -28,6 +29,8 @@ const App = (props) => {
       console.log('Use stored token', token);
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     }
+    // We have to wait for the axios header with the token to be set before any other components can load by the router, because other components might need authenticated request, so they will need the token to be in the header.
+    setReadyToRoute(true);
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       setCurrentUser(user);
@@ -54,18 +57,21 @@ const App = (props) => {
           </div>
         )}
       </nav>
-      
-      <div>
-        <Router>
-          <Route exact path='/home' component={Home} />
-          <Route exact path={['/', '/user/login']} component={UserLogin} />
-          <Route exact path='/user/signup' component={UserSignup} />
-          <Route exact path='/admin/login' component={AdminLogin} />
-          <Route exact path='/admin/:adminId' component={AdminProfile} />
-          <Route exact path='/cases' component={Cases} />
-          <Route exact path='/cases/create' component={CreateCase} />
-        </Router>
-      </div>
+      {
+        readyToRoute && (
+        <div>
+          <Router>
+            <Route exact path='/home' component={Home} />
+            <Route exact path={['/', '/user/login']} component={UserLogin} />
+            <Route exact path='/user/signup' component={UserSignup} />
+            <Route exact path='/admin/login' component={AdminLogin} />
+            <Route exact path='/admin/:adminId' component={AdminProfile} />
+            <Route exact path='/cases' component={Cases} />
+            <Route exact path='/cases/create' component={CreateCase} />
+          </Router>
+        </div>
+        )
+      }
       
       <div>
         <hr />
