@@ -5,9 +5,25 @@ import axios from 'axios';
 const AdminProfile = (props) => {
   
   const ADMIN_CASES_URL = 'http://localhost:1337/admin/profile';
+  const CASES_DELETE_URL = 'http://localhost:1337/cases/delete';
   
   const [admin, setAdmin] = useState({});
   const [adminCases, setAdminCases] = useState([]);
+  
+  const handleDelete = (e) => {
+    console.log('Delete case executed');
+    console.log(e.target.id);
+    console.log(admin._id);
+    axios.post(CASES_DELETE_URL, {
+      caseId: e.target.id,
+      adminId: admin._id
+    })
+    .then(res => {
+      console.log(res.data);
+      setAdminCases(res.data.cases);
+    })
+    .catch(err => console.log(err)); // axios get cases
+  }; // handleDelete
   
   useEffect(() => {
     axios.get(`${ADMIN_CASES_URL}/${props.match.params.adminId}`)
@@ -17,11 +33,11 @@ const AdminProfile = (props) => {
       setAdminCases(res.data.cases);
     })
     .catch(err => console.log(err)); // axios get cases
-  }, [adminCases.length]); // useEffect
+  }, []); // useEffect
   
   return(
     <div>
-      <h1>Admin Profile</h1>
+      <h1>Admin Cases</h1>
       <button><Link to={'/cases/create'}>Add Case</Link></button>
       <div className="container header">
         <div>Suburb</div>
@@ -37,6 +53,8 @@ const AdminProfile = (props) => {
             <div>{c.location}</div>
             <div>{c.day}</div>
             <div>{c.startTime}</div>
+            <div></div>
+            <div id={c._id} onClick={handleDelete}>Delete</div>
           </div>
         )})
       }
