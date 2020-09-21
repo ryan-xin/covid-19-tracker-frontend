@@ -4,12 +4,11 @@ import axios from 'axios';
 
 const Cases = (props) => {
   
-  const [cases, setCases] = useState([]);
-  
   const ALL_CASES_URL = 'http://localhost:1337/cases';
   
+  const [cases, setCases] = useState([]);
+  
   useEffect(() => {
-    console.log('Fetching cases', axios);
     axios.get(ALL_CASES_URL)
     .then(res => {
       console.log(res.data);
@@ -21,7 +20,6 @@ const Cases = (props) => {
   return(
     <div>
       <h1>All New Cases</h1>
-      <button><Link to={'/cases/create'}>Add Case</Link></button>
       <div className="container header">
         <div>Suburb</div>
         <div>Location</div>
@@ -29,7 +27,7 @@ const Cases = (props) => {
         <div>Time</div>
       </div>
       {
-        cases.map(c => {
+        cases.reverse().map(c => {
         return (
           <div className="container result">
             <div>{c.suburb}</div>

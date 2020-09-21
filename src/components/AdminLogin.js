@@ -28,7 +28,8 @@ const AdminLogin = (props) => {
       localStorage.setItem('admin', JSON.stringify(res.data.admin));
       localStorage.setItem('token', res.data.token);
       axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
-      props.history.push('/cases');
+      props.history.push(`/admin/profile/${res.data.admin._id}`);
+      window.location.reload();
     })
     .catch(err => {
       console.log(err);

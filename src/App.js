@@ -12,7 +12,6 @@ import axios from 'axios';
 
 const App = (props) => {
   
-  // TODO: Make this available to all components
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentAdmin, setCurrentAdmin] = useState(undefined);
   const [readyToRoute, setReadyToRoute] = useState(false);
@@ -52,6 +51,8 @@ const App = (props) => {
 
             {currentUser || currentAdmin ? (
               <div>
+                <li><Link to='/home'>Home</Link></li>
+                <li><Link to='/cases'>Cases</Link></li>
                 <li><a href='/logout' onClick={logout}>Logout</a></li>
               </div>
             ) : (
@@ -65,7 +66,7 @@ const App = (props) => {
           <Route exact path={['/', '/user/login']} component={UserLogin} />
           <Route exact path='/user/signup' component={UserSignup} />
           <Route exact path='/admin/login' component={AdminLogin} />
-          <Route exact path='/admin/:adminId' component={AdminProfile} />
+          <Route exact path='/admin/profile/:adminId' component={AdminProfile} />
           <Route exact path='/cases' component={Cases} />
           <Route exact path='/cases/create' component={CreateCase} />
           <div>
@@ -73,7 +74,7 @@ const App = (props) => {
             <footer>
               { currentAdmin ? (
                 <div>
-                <Link to='/cases'>Your Cases</Link>
+                <Link to={`/admin/profile/${currentAdmin._id}`}>Your Cases</Link>
                 </div>
               ) : (
                 <div>
