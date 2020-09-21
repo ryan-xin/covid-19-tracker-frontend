@@ -76,29 +76,35 @@ const EditCase = (props) => {
     }    
     console.log('Edit case executed');
   }; // handleUpdate
-    
+
   useEffect(() => {
-    axios.get(ALL_SUBURBS_URL)
+    console.log(props.match.params.caseId);
+    axios.get(`${SINGLE_CASE_URL}/${props.match.params.caseId}`)
     .then(res => {
-      console.log(res.data);
-      setState({...state, suburbs: res.data});      
+      console.log(res.data.singleCase);
+      const currentCase = res.data.singleCase;
+      axios.get(ALL_SUBURBS_URL)
+      .then(res => {
+        console.log(res.data);
+        setState({...state, 
+          suburb: currentCase.suburb,
+          location: currentCase.location,
+          day: currentCase.day,
+          month: currentCase.month,
+          year: currentCase.year,
+          startTime: currentCase.startTime,
+          endTime: currentCase.endTime, // From this line above are outer axios get current case info
+          suburbs: res.data // Inner axios get all suburbs
+        });      
+      })
+      .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
-    
-    // console.log(props.match.params.caseId);
-    // axios.get(`${SINGLE_CASE_URL}/${props.match.params.caseId}`)
-    // .then(res => {
-    //   console.log(res.data.singleCase);
-    //   // setState({...state, suburb: res.data.singleCase.suburb});      
-    //   setState({...state, location: res.data.singleCase.location});      
-    //   setState({...state, day: res.data.singleCase.day});      
-    //   // setState({...state, month: res.data.singleCase.month});      
-    //   setState({...state, year: res.data.singleCase.year});      
-    //   setState({...state, startTime: res.data.singleCase.startTime});      
-    //   setState({...state, endTime: res.data.singleCase.endTime});      
-    // })
-    // .catch(err => console.log(err));
+  }, []);
+  
+  useEffect(() => {
   }, []); // useEffect
+  
   
   return(
     <div>
@@ -106,7 +112,7 @@ const EditCase = (props) => {
       <form>
         <label>Suburb:</label>
         <select type="text" name="suburb" placeholder="e.g. Sydney" onChange={handleChange}>
-          <option value="">Select...</option>
+          <option defaultValue={state.suburb}>Select...</option>
           {
             state.suburbs.map(suburb => 
               <option value={suburb.suburb}>{suburb.suburb}</option>
@@ -118,7 +124,7 @@ const EditCase = (props) => {
         <label>Day:</label>
         <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange} defaultValue={state.day} />
         <label>Month:</label>
-        <select type="text" name="month" placeholder="e.g. January" onChange={handleChange}>
+        <select type="text" name="month" defaultValue={state.month} placeholder="e.g. January" onChange={handleChange}>
           <option value="">Select...</option>
           <option value="January">January</option>
           <option value="February">February</option>
