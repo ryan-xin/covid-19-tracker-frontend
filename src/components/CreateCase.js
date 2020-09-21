@@ -4,6 +4,7 @@ import axios from 'axios';
 const CreateCase = (props) => {
   
   const CREATE_CASE_URL = 'http://localhost:1337/cases/create';
+  const ALL_SUBURBS_URL = 'http://localhost:1337/suburbs';
 
   const [state, setState] = useState({
     suburb: '',
@@ -14,7 +15,8 @@ const CreateCase = (props) => {
     startTime: '',
     endTime: '',
     blankFieldMessage: '',
-    fieldValidationMessage: ''
+    fieldValidationMessage: '',
+    suburbs: []
   });
 
   const handleChange = (e) => {
@@ -74,12 +76,28 @@ const CreateCase = (props) => {
     }
   }; // handleCreate
   
+  useEffect(() => {
+    axios.get(ALL_SUBURBS_URL)
+    .then(res => {
+      console.log(res.data);
+      setState({...state, suburbs: res.data});      
+    })
+    .catch(err => console.log(err));
+  }, []); // useEffect
+  
   return(
     <div>
       <h1>Create New Case</h1>
       <form>
         <label>Suburb:</label>
-        <input type="text" name="suburb" placeholder="e.g. Sydney" onChange={handleChange} />
+        <select type="text" name="suburb" placeholder="e.g. Sydney" onChange={handleChange}>
+          <option value="">Select...</option>
+          {
+            state.suburbs.map(suburb => 
+              <option value={suburb.suburb}>{suburb.suburb}</option>
+            )
+          }
+        </select>
         <label>Location:</label>
         <input type="text" name="location" placeholder="e.g. Shopping Mall" onChange={handleChange} />
         <label>Date:</label>

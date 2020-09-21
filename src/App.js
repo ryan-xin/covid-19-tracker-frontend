@@ -43,48 +43,50 @@ const App = (props) => {
   
   return (
     <div>
-      <nav>
-        <Link to={'/home'}>Logo</Link>
-
-        {currentUser || currentAdmin ? (
-          <div>
-            <li><a href='/logout' onClick={logout}>Logout</a></li>
-          </div>
-        ) : (
-          <div>
-            <li><Link to={'/user/login'}>Login</Link></li>
-            <li><Link to={'/user/signup'}>Sign Up</Link></li>
-          </div>
-        )}
-      </nav>
       {
-        readyToRoute && (
-        <div>
-          <Router>
-            <Route exact path='/home' component={Home} />
-            <Route exact path={['/', '/user/login']} component={UserLogin} />
-            <Route exact path='/user/signup' component={UserSignup} />
-            <Route exact path='/admin/login' component={AdminLogin} />
-            <Route exact path='/admin/:adminId' component={AdminProfile} />
-            <Route exact path='/cases' component={Cases} />
-            <Route exact path='/cases/create' component={CreateCase} />
-          </Router>
-        </div>
-        )
-      }
-      
+      readyToRoute && (
       <div>
-        <hr />
-        <footer>
-          { currentAdmin ? (
-            <Link to={`/admin/${1}`}>Your Cases</Link>
-          ) : (
-            <Link to={'/admin/login'}>Admin Login</Link>
-          )
-          }
-        </footer>
+        <Router>
+          <nav>
+            <Link to={'/home'}>Logo</Link>
+
+            {currentUser || currentAdmin ? (
+              <div>
+                <li><a href='/logout' onClick={logout}>Logout</a></li>
+              </div>
+            ) : (
+              <div>
+                <li><Link to='/user/login'>Login</Link></li>
+                <li><Link to='/user/signup'>Sign Up</Link></li>
+              </div>
+            )}
+          </nav>
+          <Route exact path='/home' component={Home} />
+          <Route exact path={['/', '/user/login']} component={UserLogin} />
+          <Route exact path='/user/signup' component={UserSignup} />
+          <Route exact path='/admin/login' component={AdminLogin} />
+          <Route exact path='/admin/:adminId' component={AdminProfile} />
+          <Route exact path='/cases' component={Cases} />
+          <Route exact path='/cases/create' component={CreateCase} />
+          <div>
+            <hr />
+            <footer>
+              { currentAdmin ? (
+                <div>
+                <Link to='/cases'>Your Cases</Link>
+                </div>
+              ) : (
+                <div>
+                <Link to='/admin/login'>Admin Login</Link>
+                </div>
+              )
+              }
+            </footer>
+          </div>
+        </Router>
       </div>
-      
+      )
+      }
     </div>
   ) // return
 }; // App
