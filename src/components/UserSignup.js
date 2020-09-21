@@ -59,9 +59,10 @@ const UserSignup = (props) => {
     })
     .then(res => {
       console.log(res.data);
-      localStorage.setItem('user', JSON.stringify(res.data));
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+      localStorage.setItem('token', res.data.token);
+      axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
       props.history.push('/home');
-      window.location.reload();
     })
     .catch(err => {
       console.dir(err);

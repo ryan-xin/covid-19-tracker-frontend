@@ -9,6 +9,7 @@ const Cases = (props) => {
   const ALL_CASES_URL = 'http://localhost:1337/cases';
   
   useEffect(() => {
+    console.log('Fetching cases', axios);
     axios.get(ALL_CASES_URL)
     .then(res => {
       console.log(res.data);

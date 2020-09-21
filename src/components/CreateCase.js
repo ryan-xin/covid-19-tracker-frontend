@@ -63,10 +63,12 @@ const CreateCase = (props) => {
         year: state.year,
         startTime: state.startTime,
         endTime: state.endTime,
-        adminID: admin.admin._id
+        adminID: admin._id
       })
       .then(res => {
         console.log(res.data);
+        props.history.push('/cases');
+        window.location.reload();
       })
       .catch(err => console.log(err)); // axios post
     }
