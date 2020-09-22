@@ -6,7 +6,7 @@ const CreateCase = (props) => {
   
   const CREATE_CASE_URL = 'http://localhost:1337/cases/create';
 
-  const [state, setState] = useState({
+  const [form, setForm] = useState({
     suburb: '',
     location: '',
     day: '',
@@ -14,42 +14,57 @@ const CreateCase = (props) => {
     year: '',
     startTime: '',
     endTime: '',
-    blankFieldMessage: '',
-    fieldValidationMessage: '',
     suburbs: []
+  });
+  
+  const [validationErrors, setValidationErrors] = useState({
+    blankField: '',
+    dayFormat: '',
+    yearFormat: '',
+    timeFormat: ''
   });
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setState({
-      ...state,
+    setForm({
+      ...form,
       [e.target.name]: value
     });
   };
   
   const formValidation = (e) => {
-    setState({...state, blankFieldMessage: ''});
-    setState({...state, fieldValidationMessage: ''});
-    if (state.suburb === '' || state.location === '' || state.day === '' || state.month === '' || state.year === '' || state.startTime === '' || state.endTime === '') {
-      setState({...state, blankFieldMessage: 'Fields can"t be blank.'});
-      return false;
+    setValidationErrors({
+      blankField: '',
+      dayFormat: '',
+      yearFormat: '',
+      timeFormat: ''
+    });
+    console.log('Case create submitted');
+    const errors = {};
+    let validation = true;
+    if (form.suburb === '' || form.location === '' || form.day === '' || form.month === '' || form.year === '' || form.startTime === '' || form.endTime === '') {
+      errors.blankField = 'Fields can"t be blank.';
+      validation = false;
     }
     const dateRegex = /\b([1-9]|[12][0-9]|3[01])\b/;
-    if (!dateRegex.test(state.day)) {
-      setState({...state, fieldValidationMessage: 'Invalid date field.'});
-      return false;
+    if (!dateRegex.test(form.day)) {
+      errors.dayFormat = 'Invalid date field format.';
+      validation = false;
     }
     const yearRegex = /\b^[2][0]\d{2}\b/;
-    if (!yearRegex.test(state.year)) {
-      setState({...state, fieldValidationMessage: 'Invalid year field.'});
-      return false;
+    if (!yearRegex.test(form.year)) {
+      errors.yearFormat = 'Invalid year field format.';
+      validation = false;
     }
     const timeRegex = /\b(1[012]|[1-9]):[0-5][0-9](am|pm)$\b/;
-    if (!timeRegex.test(state.startTime) || !timeRegex.test(state.endTime)) {
-      setState({...state, fieldValidationMessage: 'Invalid time field.'});
-      return false;
+    if (!timeRegex.test(form.startTime) || !timeRegex.test(form.endTime)) {
+      errors.timeFormat = 'Invalid time field format.';
+      validation = false;
     }
-    return true;
+    if (!validation) {
+      setValidationErrors(errors);
+    }
+    return validation;
   };
   
   const handleCreate = (e) => {
@@ -58,13 +73,13 @@ const CreateCase = (props) => {
     const admin = JSON.parse(localStorage.getItem('admin'));
     if (formValidation()) {
       axios.post(CREATE_CASE_URL, {
-        suburb: state.suburb,
-        location: state.location,
-        day: state.day,
-        month: state.month,
-        year: state.year,
-        startTime: state.startTime,
-        endTime: state.endTime,
+        suburb: form.suburb,
+        location: form.location,
+        day: form.day,
+        month: form.month,
+        year: form.year,
+        startTime: form.startTime,
+        endTime: form.endTime,
         adminID: admin._id
       })
       .then(res => {
@@ -78,7 +93,7 @@ const CreateCase = (props) => {
   }; // handleCreate
   
   const handleSelectSuburb = (suburb) => {
-    setState({...state, suburb: suburb});
+    setForm({...form, suburb: suburb});
   }; // handleSelectSuburb
   
   return(
@@ -116,8 +131,10 @@ const CreateCase = (props) => {
         <input type="Submit" placeholder="Create" onClick={handleCreate} />        
       </form>
       <div className="errorMessage">
-        <p>{state.blankFieldMessage}</p>
-        <p>{state.fieldValidationMessage}</p>
+        <p>{validationErrors.blankField}</p>
+        <p>{validationErrors.dayFormat}</p>
+        <p>{validationErrors.yearFormat}</p>
+        <p>{validationErrors.timeFormat}</p>
       </div>
     </div>
   ); // return

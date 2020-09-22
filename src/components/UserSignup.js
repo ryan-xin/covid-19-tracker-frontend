@@ -1,77 +1,89 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { isEmail } from 'validator';
+import Autocomplete from './Autocomplete';
 
 const UserSignup = (props) => {
   
   const USER_SIGNUP_URL = 'http://localhost:1337/user/signup';
   
-  const [state, setState] = useState({
+  const [form, setForm] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
     suburb: '',
-    errorMessage: '',
-    blankFieldMessage: '',
-    emailValidationMessage: ''
   });
 
+  const [validationErrors, setValidationErrors] = useState({
+    blankField: '',
+    email: '',
+    password: '',
+    existingEmail: ''
+  });
+  
   const handleChange = (e) => {
     const value = e.target.value;
-    setState({
-      ...state,
-      [e.target.name]: value
-    })
+    setForm({...form, [e.target.name]: value})
   };
   
-  const emailValidation = value => {
-    if (isEmail(value)) {
-      return true;
-    } else {
-      return false;
+  const handleSelectSuburb = (suburb) => {
+    setForm({...form, suburb: suburb});
+  }; // handleSelectSuburb  
+  
+  const formValidation = () => {
+    setValidationErrors({
+      blankField: '',
+      email: '',
+      password: '',
+      existingEmail: ''
+    });
+    console.log('Signup Submitted');
+    const errors = {};
+    let validation = true;
+    if (form.name === '' || form.email === '' || form.password === '' || form.suburb === '') {
+      errors.blankField = 'Fields can"t be blank.';
+      validation = false;
     }
-  };
-  
+    if (!isEmail(form.email)) {
+      errors.email = 'Invalid email.';
+      validation = false;
+    }
+    if (form.password !== form.confirmPassword) {
+      errors.password = 'Please make sure your passwords match.';
+      validation = false;
+    }
+    if (!validation) {
+      setValidationErrors(errors);
+    } 
+    return validation;
+  }; // formValidation
+   
   const handleSignup = (e) => {
     e.preventDefault();
-    setState({...state, blankFieldMessage: ''});
-    setState({...state, emailValidationMessage: ''});
-    setState({...state, errorMessage: ''});
-    console.log('Signup Submitted');
-    if (state.name === '' || state.email === '' || state.password === '' || state.suburb === '') {
-      setState({...state, blankFieldMessage: 'Fields can"t be blank.'});
-      return;
+    if (formValidation()) {
+      axios.post(USER_SIGNUP_URL, {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        suburb: form.suburb
+      })
+      .then(res => {
+        console.log(res.data);
+        localStorage.setItem('user', JSON.stringify(res.data.user));
+        localStorage.setItem('token', res.data.token);
+        axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
+        props.history.push('/home');
+        window.location.reload();
+      })
+      .catch(err => {
+        console.dir(err);
+        if (err.response.status === 401) {
+          console.log(err.response.data.email);
+          setValidationErrors({existingEmail: err.response.data.email});
+        }
+      }); // axios.post
     }
-    if (!emailValidation(state.email)) {
-      setState({...state, emailValidationMessage: 'Invalid email.'});
-      return;
-    }
-    if (state.password !== state.confirmPassword) {
-      setState({...state, errorMessage: 'Please make sure your passwords match.'});
-      return;
-    }
-    axios.post(USER_SIGNUP_URL, {
-      name: state.name,
-      email: state.email,
-      password: state.password,
-      suburb: state.suburb
-    })
-    .then(res => {
-      console.log(res.data);
-      localStorage.setItem('user', JSON.stringify(res.data.user));
-      localStorage.setItem('token', res.data.token);
-      axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
-      props.history.push('/home');
-      window.location.reload();
-    })
-    .catch(err => {
-      console.dir(err);
-      if (err.response.status === 401) {
-        console.log(err.response.data.email);
-        setState({...state, errorMessage: err.response.data.email});
-      }
-    }); // axios.post
   }; // handleSignup
   
   return(
@@ -86,15 +98,15 @@ const UserSignup = (props) => {
         <input type="text" name="password" onChange={handleChange}/>
         <label>Confirm Password:</label>
         <input type="text" name="confirmPassword" onChange={handleChange}/>
-        {/* TODO: Sydney suburbs API */}
         <label>Suburb:</label>
-        <input type="text" name="suburb" onChange={handleChange}/>
+        <Autocomplete onSelectSuburb={handleSelectSuburb}/>
         <input type="Submit" placeholder="Login" onClick={handleSignup} />
       </form>
       <div className="errorMessage">
-        <p>{state.errorMessage}</p>
-        <p>{state.blankFieldMessage}</p>
-        <p>{state.emailValidationMessage}</p>
+        <p>{validationErrors.blankField}</p>
+        <p>{validationErrors.email}</p>
+        <p>{validationErrors.password}</p>
+        <p>{validationErrors.existingEmail}</p>
       </div>
     </div>
   ) // return

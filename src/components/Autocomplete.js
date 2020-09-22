@@ -38,7 +38,7 @@ const Autocomplete = (props) => {
   useEffect(() => {
     setPreSuburb(props.preSuburb);
   }, [props.preSuburb])
-  
+
   useEffect(() => {
     axios.get(ALL_SUBURBS_URL)
     .then(res => {
