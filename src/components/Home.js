@@ -43,7 +43,10 @@ const Home = (props) => {
   }, []);
   
   const getColor = (number) => {
-    return number > 100001 ? '#800026' :
+    return number > 700000 ? '#3a0012' :
+      number > 500000 ? '#520019' :
+      number > 300000 ? '#6a0020' :
+      number > 100000 ? '#800026' :
       number > 50000 ? '#BD0026' :
       number > 20000 ? '#E31A1C' :
       number > 10000 ? '#FC4E2A' :
@@ -51,19 +54,37 @@ const Home = (props) => {
       number > 2000 ? '#FEB24C' :
       number > 1000 ? '#FED976' :
       '#FFEDA0'; 
-  }
+  };
   
   const style = (countryName) => {
-    console.log(countryCases[countryName]);
+    // console.log(countryCases[countryName]);
     return {
       fillColor: getColor(countryCases[countryName]),
       weight: 1,
       opacity: 1,
       color: 'white',
       dashArray: '3',
-      fillOpacity: 0.6
+      fillOpacity: 0.4
     };
-  }
+  };
+  
+  const handleMouseOver = (e) => {
+    e.target.setStyle({
+      weight: 3,
+      fillOpacity: 0.6
+    })
+  };
+
+  const handleMouseOut = (e) => {
+    e.target.setStyle({
+      weight: 1,
+      fillOpacity: 0.4
+    })
+  };
+  
+  const handleClick = (e) => {
+    console.log('Clicked');
+  };
   
   return (
     <div>
@@ -80,12 +101,22 @@ const Home = (props) => {
             position={[c.countryInfo.lat, c.countryInfo.long]}
           />
         ))} */}
-
         {countries.map((country) => {
-          return <GeoJSON key={country.properties.admin} data={country} style={style(country.properties.admin)}/>
+          return <GeoJSON 
+            key={country.properties.admin} 
+            data={country} 
+            style={style(country.properties.admin)}
+            onMouseOver={handleMouseOver}
+            onMouseOut={handleMouseOut}
+            onClick={handleClick}
+          />
         })}
-      </Map>)
+      </Map>
+      )
       }
+      <div>
+        
+      </div>
     </div>
   ); // return
 }; // Home
