@@ -19,6 +19,7 @@ const UserSignup = (props) => {
     blankField: '',
     email: '',
     password: '',
+    passwordLength: '',
     existingEmail: ''
   });
   
@@ -36,6 +37,7 @@ const UserSignup = (props) => {
       blankField: '',
       email: '',
       password: '',
+      passwordLength: '',
       existingEmail: ''
     });
     console.log('Signup Submitted');
@@ -47,6 +49,10 @@ const UserSignup = (props) => {
     }
     if (!isEmail(form.email)) {
       errors.email = 'Invalid email.';
+      validation = false;
+    }
+    if (form.password.length < 6) {
+      errors.passwordLength = 'Password must at least 6 characters.';
       validation = false;
     }
     if (form.password !== form.confirmPassword) {
@@ -106,6 +112,7 @@ const UserSignup = (props) => {
         <p>{validationErrors.blankField}</p>
         <p>{validationErrors.email}</p>
         <p>{validationErrors.password}</p>
+        <p>{validationErrors.passwordLength}</p>
         <p>{validationErrors.existingEmail}</p>
       </div>
     </div>
