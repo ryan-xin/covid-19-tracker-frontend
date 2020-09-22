@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Autocomplete from './Autocomplete';
 
 const EditCase = (props) => {
   
   const SINGLE_CASE_URL = 'http://localhost:1337/cases';
   const EDIT_CASE_URL = 'http://localhost:1337/cases/edit';
-  const ALL_SUBURBS_URL = 'http://localhost:1337/suburbs';
 
   const [state, setState] = useState({
     suburb: '',
@@ -77,54 +77,41 @@ const EditCase = (props) => {
     console.log('Edit case executed');
   }; // handleUpdate
 
+  const handleSelectSuburb = (suburb) => {
+    setState({...state, suburb: suburb});
+  }; // handleSelectSuburb
+  
   useEffect(() => {
     console.log(props.match.params.caseId);
     axios.get(`${SINGLE_CASE_URL}/${props.match.params.caseId}`)
     .then(res => {
       console.log(res.data.singleCase);
       const currentCase = res.data.singleCase;
-      axios.get(ALL_SUBURBS_URL)
-      .then(res => {
-        console.log(res.data);
-        setState({...state, 
-          suburb: currentCase.suburb,
-          location: currentCase.location,
-          day: currentCase.day,
-          month: currentCase.month,
-          year: currentCase.year,
-          startTime: currentCase.startTime,
-          endTime: currentCase.endTime, // From this line above are outer axios get current case info
-          suburbs: res.data // Inner axios get all suburbs
-        });      
-      })
-      .catch(err => console.log(err));
+      setState({...state, 
+        suburb: currentCase.suburb,
+        location: currentCase.location,
+        day: currentCase.day,
+        month: currentCase.month,
+        year: currentCase.year,
+        startTime: currentCase.startTime,
+        endTime: currentCase.endTime
+      });      
     })
     .catch(err => console.log(err));
   }, []);
-  
-  useEffect(() => {
-  }, []); // useEffect
-  
   
   return(
     <div>
       <h1>Edit Case</h1>
       <form>
         <label>Suburb:</label>
-        <select type="text" name="suburb" placeholder="e.g. Sydney" onChange={handleChange}>
-          <option defaultValue={state.suburb}>Select...</option>
-          {
-            state.suburbs.map(suburb => 
-              <option value={suburb.suburb}>{suburb.suburb}</option>
-            )
-          }
-        </select>
+        <Autocomplete onSelectSuburb={handleSelectSuburb} preSuburb={state.suburb}/>
         <label>Location:</label>
         <input type="text" name="location" placeholder="e.g. Shopping Mall" onChange={handleChange} defaultValue={state.location} />
         <label>Day:</label>
         <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange} defaultValue={state.day} />
         <label>Month:</label>
-        <select type="text" name="month" defaultValue={state.month} placeholder="e.g. January" onChange={handleChange}>
+        <select type="text" name="month" value={state.month} placeholder="e.g. January" onChange={handleChange}>
           <option value="">Select...</option>
           <option value="January">January</option>
           <option value="February">February</option>

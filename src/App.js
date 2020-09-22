@@ -54,6 +54,9 @@ const App = (props) => {
               <div>
                 <li><Link to='/home'>Home</Link></li>
                 <li><Link to='/cases'>Cases</Link></li>
+                {
+                  currentAdmin && <li><Link to={`/admin/profile/${currentAdmin._id}`}>Your Cases</Link></li>
+                }
                 <li><a href='/logout' onClick={logout}>Logout</a></li>
               </div>
             ) : (
@@ -74,15 +77,7 @@ const App = (props) => {
           <div>
             <hr />
             <footer>
-              { currentAdmin ? (
-                <div>
-                <Link to={`/admin/profile/${currentAdmin._id}`}>Your Cases</Link>
-                </div>
-              ) : (
-                <div>
-                <Link to='/admin/login'>Admin Login</Link>
-                </div>
-              )
+              { !currentAdmin && <div><Link to='/admin/login'>Admin Login</Link></div>
               }
             </footer>
           </div>
