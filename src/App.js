@@ -54,7 +54,6 @@ const App = (props) => {
             {currentUser || currentAdmin ? (
               <div>
                 <li><Link to='/world'>World</Link></li>
-                <li><Link to='/cases'>Cases</Link></li>
                 <li><Link to='/sydney'>Sydney</Link></li>
                 {
                   currentAdmin && <li><Link to={`/admin/profile/${currentAdmin._id}`}>Your Cases</Link></li>
