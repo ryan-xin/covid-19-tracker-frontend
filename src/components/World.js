@@ -140,9 +140,7 @@ const World = (props) => {
   
   return (
     <div>
-      {
-      countryCases && 
-      (<Map center={[0, 0]} zoom={3}>
+     <Map center={[0, 0]} zoom={3}>
         <TileLayer
           url="https://api.mapbox.com/styles/v1/ryanxin/ckfdup3bt0d5p19rtln7yawiw/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnlhbnhpbiIsImEiOiJja2ZkdTFhajQwNDh6MnRzaG51ZHFsenByIn0.eqvLzhrjtwg78imgHDi6SQ"
           attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
@@ -153,7 +151,8 @@ const World = (props) => {
             position={[c.countryInfo.lat, c.countryInfo.long]}
           />
         ))} */}
-        {countries.map((country) => {
+        {
+          countryCases && countries.map((country) => {
           return <GeoJSON 
             key={country.properties.admin} 
             id={country.properties.admin} 
@@ -165,8 +164,6 @@ const World = (props) => {
           />
         })}
       </Map>
-      )
-      }
       <div>
         <p><strong>Country: </strong>{currentCountry.name}</p>
         <p><strong>Cases: </strong>{currentCountry.cases}</p>
