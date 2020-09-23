@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import UserLogin from './components/UserLogin';
 import UserSignup from './components/UserSignup';
 import AdminLogin from './components/AdminLogin';
@@ -11,6 +10,7 @@ import CreateCase from './components/CreateCase';
 import EditCase from './components/EditCase';
 import AdminProfile from './components/AdminProfile';
 import ThankYou from './components/ThankYou';
+import PrivateRoute from './components/PrivateRoute';
 import axios from 'axios';
 
 const App = (props) => {
@@ -50,8 +50,7 @@ const App = (props) => {
       <div>
         <Router>
           <nav>
-            <Link to={'/world'}>Logo</Link>
-
+            <Link to={'/world'}><img src='/logo.svg' alt='logo' /></Link>
             {currentUser || currentAdmin ? (
               <div>
                 <li><Link to='/world'>World</Link></li>
@@ -69,15 +68,15 @@ const App = (props) => {
               </div>
             )}
           </nav>
-          <Route exact path='/world' component={World} />
-          <Route exact path='/sydney' component={Sydney} />
-          <Route exact path={['/', '/user/login']} component={UserLogin} />
+          <PrivateRoute exact path={['/', '/world']} component={World} />
+          <PrivateRoute exact path='/sydney' component={Sydney} />
+          <Route exact path='/user/login' component={UserLogin} />
           <Route exact path='/user/signup' component={UserSignup} />
           <Route exact path='/admin/login' component={AdminLogin} />
-          <Route exact path='/admin/profile/:adminId' component={AdminProfile} />
-          <Route exact path='/cases' component={Cases} />
-          <Route exact path='/cases/create' component={CreateCase} />
-          <Route exact path='/cases/edit/:caseId' component={EditCase} />
+          <PrivateRoute exact path='/admin/profile/:adminId' component={AdminProfile} />
+          <PrivateRoute exact path='/cases' component={Cases} />
+          <PrivateRoute exact path='/cases/create' component={CreateCase} />
+          <PrivateRoute exact path='/cases/edit/:caseId' component={EditCase} />
           <Route exact path='/thankyoutoourheros' component={ThankYou} />
           <div>
             <hr />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Map, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
 import axios from 'axios';
-import '../worldMap.css';
+import '../css/worldMap.css';
 import Dashboard from './Dashboard';
 
 const World = (props) => {
@@ -80,7 +80,7 @@ const World = (props) => {
         opacity: 1,
         color: 'white',
         dashArray: '3',
-        fillOpacity: 0.4
+        fillOpacity: 0.6
       };
     } else {
         return {
@@ -89,7 +89,7 @@ const World = (props) => {
           opacity: 1,
           color: 'white',
           dashArray: '3',
-          fillOpacity: 0.4
+          fillOpacity: 0.6
         };
     }
   };
@@ -97,14 +97,14 @@ const World = (props) => {
   const handleMouseOver = (e) => {
     e.target.setStyle({
       weight: 3,
-      fillOpacity: 0.6
+      fillOpacity: 0.8
     })
   };
 
   const handleMouseOut = (e) => {
     e.target.setStyle({
       weight: 1,
-      fillOpacity: 0.4
+      fillOpacity: 0.6
     })
   };
   
@@ -142,7 +142,7 @@ const World = (props) => {
     <div>
      <Map center={[0, 0]} zoom={3}>
         <TileLayer
-          url="https://api.mapbox.com/styles/v1/ryanxin/ckfdup3bt0d5p19rtln7yawiw/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnlhbnhpbiIsImEiOiJja2ZkdTFhajQwNDh6MnRzaG51ZHFsenByIn0.eqvLzhrjtwg78imgHDi6SQ"
+          url = "https://api.mapbox.com/styles/v1/ryanxin/ckfdu9mjp5a7719o015uoptfb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnlhbnhpbiIsImEiOiJja2ZkdTFhajQwNDh6MnRzaG51ZHFsenByIn0.eqvLzhrjtwg78imgHDi6SQ"
           attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
         />
         {
