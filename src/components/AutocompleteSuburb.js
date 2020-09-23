@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-const Autocomplete = (props) => {
+const AutocompleteSuburb = (props) => {
   
   const ALL_SUBURBS_URL = 'http://localhost:1337/suburbs';
   
@@ -81,8 +81,8 @@ const Autocomplete = (props) => {
   );
 }; // class Autocomplete
 
-Autocomplete.propTypes = {
+AutocompleteSuburb.propTypes = {
   options: PropTypes.instanceOf(Array)
 };
 
-export default Autocomplete;
+export default AutocompleteSuburb;

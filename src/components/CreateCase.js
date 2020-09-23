@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Autocomplete from './Autocomplete';
+import AutocompleteSuburb from './AutocompleteSuburb';
+import AutocompleteLocation from './AutocompleteLocation';
 
 const CreateCase = (props) => {
   
@@ -14,6 +15,8 @@ const CreateCase = (props) => {
     year: '',
     startTime: '',
     endTime: '',
+    lat: '',
+    lng: '',
     suburbs: []
   });
   
@@ -80,6 +83,8 @@ const CreateCase = (props) => {
         year: form.year,
         startTime: form.startTime,
         endTime: form.endTime,
+        lat: form.lat,
+        lng: form.lng,
         adminID: admin._id
       })
       .then(res => {
@@ -96,14 +101,18 @@ const CreateCase = (props) => {
     setForm({...form, suburb: suburb});
   }; // handleSelectSuburb
   
+  const handleSelectLocation = (location, lat, lng) => {
+    setForm({...form, location: location, lat: lat, lng: lng});
+  }; // handleSelectLocation
+  
   return(
     <div>
       <h1>Create New Case</h1>
       <form>
         <label>Suburb:</label>
-        <Autocomplete onSelectSuburb={handleSelectSuburb}/>
+        <AutocompleteSuburb onSelectSuburb={handleSelectSuburb}/>
         <label>Location:</label>
-        <input type="text" name="location" placeholder="e.g. Shopping Mall" onChange={handleChange} />
+        <AutocompleteLocation onSelectLocation={handleSelectLocation}/>
         <label>Day:</label>
         <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange}/>
         <label>Month:</label>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Autocomplete from './Autocomplete';
+import AutocompleteSuburb from './AutocompleteSuburb';
+import AutocompleteLocation from './AutocompleteLocation';
 
 const EditCase = (props) => {
   
@@ -15,6 +16,8 @@ const EditCase = (props) => {
     year: '',
     startTime: '',
     endTime: '',
+    lat: '',
+    lng: '',
     suburbs: []
   });
 
@@ -79,6 +82,8 @@ const EditCase = (props) => {
         year: form.year,
         startTime: form.startTime,
         endTime: form.endTime,
+        lat: form.lat,
+        lng: form.lng,
         caseId: props.match.params.caseId
       })
       .then(res => {
@@ -95,6 +100,10 @@ const EditCase = (props) => {
     setForm({...form, suburb: suburb});
   }; // handleSelectSuburb
   
+  const handleSelectLocation = (location, lat, lng) => {
+    setForm({...form, location: location, lat: lat, lng: lng});
+  }; // handleSelectLocation
+  
   useEffect(() => {
     console.log(props.match.params.caseId);
     axios.get(`${SINGLE_CASE_URL}/${props.match.params.caseId}`)
@@ -108,7 +117,9 @@ const EditCase = (props) => {
         month: currentCase.month,
         year: currentCase.year,
         startTime: currentCase.startTime,
-        endTime: currentCase.endTime
+        endTime: currentCase.endTime,
+        lat: '',
+        lng: '',
       });      
     })
     .catch(err => console.log(err));
@@ -119,9 +130,9 @@ const EditCase = (props) => {
       <h1>Edit Case</h1>
       <form>
         <label>Suburb:</label>
-        <Autocomplete onSelectSuburb={handleSelectSuburb} preSuburb={form.suburb}/>
+        <AutocompleteSuburb onSelectSuburb={handleSelectSuburb} preSuburb={form.suburb}/>
         <label>Location:</label>
-        <input type="text" name="location" placeholder="e.g. Shopping Mall" onChange={handleChange} defaultValue={form.location} />
+        <AutocompleteLocation onSelectLocation={handleSelectLocation} preLocation={form.location}/>
         <label>Day:</label>
         <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange} defaultValue={form.day} />
         <label>Month:</label>

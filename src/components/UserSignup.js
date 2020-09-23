@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { isEmail } from 'validator';
-import Autocomplete from './Autocomplete';
+import AutocompleteSuburb from './AutocompleteSuburb';
 
 const UserSignup = (props) => {
   
@@ -105,7 +105,7 @@ const UserSignup = (props) => {
         <label>Confirm Password:</label>
         <input type="text" name="confirmPassword" onChange={handleChange}/>
         <label>Suburb:</label>
-        <Autocomplete onSelectSuburb={handleSelectSuburb}/>
+        <AutocompleteSuburb onSelectSuburb={handleSelectSuburb}/>
         <input type="Submit" placeholder="Login" onClick={handleSignup} />
       </form>
       <div className="errorMessage">
