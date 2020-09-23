@@ -118,8 +118,8 @@ const EditCase = (props) => {
         year: currentCase.year,
         startTime: currentCase.startTime,
         endTime: currentCase.endTime,
-        lat: '',
-        lng: '',
+        lat: currentCase.lat,
+        lng: currentCase.lng,
       });      
     })
     .catch(err => console.log(err));

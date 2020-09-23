@@ -48,7 +48,7 @@ const AdminProfile = (props) => {
       {
         adminCases.reverse().map(c => {
         return (
-          <div className="container result">
+          <div key={c._id} className="container result">
             <div>{c.suburb}</div>
             <div>{c.location}</div>
             <div>{c.day}</div>

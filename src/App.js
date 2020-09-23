@@ -49,7 +49,7 @@ const App = (props) => {
       readyToRoute && (
       <div>
         <Router>
-          <nav>
+          <div>
             <Link to={'/world'}><img src='/logo.svg' alt='logo' /></Link>
             {currentUser || currentAdmin ? (
               <div>
@@ -67,7 +67,7 @@ const App = (props) => {
                 <li><Link to='/user/signup'>Sign Up</Link></li>
               </div>
             )}
-          </nav>
+          </div>
           <PrivateRoute exact path={['/', '/world']} component={World} />
           <PrivateRoute exact path='/sydney' component={Sydney} />
           <Route exact path='/user/login' component={UserLogin} />
@@ -81,8 +81,13 @@ const App = (props) => {
           <div>
             <hr />
             <footer>
-              { !currentAdmin && <div><Link to='/admin/login'>Admin Login</Link></div>
-              }
+              <ul>
+                <li>Copyright &copy; 2020 GA-SEI 37 by Ryan Xin</li>
+                <li><a target="_blank" href="https://www.linkedin.com/in/ryan-xin/">LinkedIn</a></li>
+                <li><a target="_blank" href="https://github.com/ryan-xin/wdywt">GitHub</a></li>
+                { !currentAdmin && <li><Link to='/admin/login'>Admin Login</Link></li>
+                }
+              </ul>
             </footer>
           </div>
         </Router>
