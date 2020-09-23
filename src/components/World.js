@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Map, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
-import { Icon } from "leaflet";
 import axios from 'axios';
 import '../worldMap.css';
 import Dashboard from './Dashboard';

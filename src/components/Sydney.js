@@ -3,16 +3,22 @@ import { Map, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
 import { Icon } from "leaflet";
 import axios from 'axios';
 
+
 const Sydney = (props) => {
   
   const ALL_CASES_URL = 'http://localhost:1337/cases';
-
+  
   const [cases, setCases] = useState([]);
   const [currentLocation, setCurrentLocation] = useState({
     lat: -33.86785,
     lng: 151.20732
   })
-
+  
+  const caseIcon = new Icon({
+    iconUrl: "/caseIcon.svg",
+    iconSize: [25, 25]
+  });
+  
   useEffect(() => {
     axios.get(ALL_CASES_URL)
       .then(res => {
@@ -44,8 +50,10 @@ const Sydney = (props) => {
           <Marker
             key={c.name}
             position={[c.lat, c.lng]}
+            icon={caseIcon}
           />
         ))}
+        <Marker position={[currentLocation.lat, currentLocation.lng]} />
       </Map>      
     </div>
   )
