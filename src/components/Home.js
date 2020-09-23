@@ -3,15 +3,25 @@ import { Map, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
 import { Icon } from "leaflet";
 import axios from 'axios';
 import '../map.css';
+import Dashboard from './Dashboard';
 
 const Home = (props) => {
   
-  const CASE_DATA_URL = "https://corona.lmao.ninja/v2/countries";
+  const CASE_DATA_URL = "https://disease.sh/v3/covid-19/countries";
   const COUNTRY_GEOJSON_URL = 'http://localhost:1337/countries';
   
   const [cases, setCases] = useState([]);
   const [countries, setCountries] = useState([]);
   const [countryCases, setCountryCases] = useState(undefined);
+  const [currentCountry, setCurrentCountry] = useState({
+    name: '-',
+    cases: '-',
+    todayCases: '-',
+    deaths: '-',
+    recovered: '-',
+    active: '-',
+    updated: '-'
+  });
   
   useEffect(() => {
     console.log('useEffect');
@@ -22,7 +32,13 @@ const Home = (props) => {
       let countryCasesPair = {};
       res.data.forEach((r) => {
         let key = r.country;
-        countryCasesPair[key] = r.cases;
+        countryCasesPair[key] = {};
+        countryCasesPair[key].cases = r.cases;
+        countryCasesPair[key].todayCases = r.todayCases;
+        countryCasesPair[key].deaths = r.deaths;
+        countryCasesPair[key].recovered = r.recovered;
+        countryCasesPair[key].active = r.active;
+        countryCasesPair[key].updated = r.updated;
       });
       setCountryCases(countryCasesPair);
     })
@@ -58,14 +74,25 @@ const Home = (props) => {
   
   const style = (countryName) => {
     // console.log(countryCases[countryName]);
-    return {
-      fillColor: getColor(countryCases[countryName]),
-      weight: 1,
-      opacity: 1,
-      color: 'white',
-      dashArray: '3',
-      fillOpacity: 0.4
-    };
+    if (countryCases[countryName]) {
+      return {
+        fillColor: getColor(countryCases[countryName].cases),
+        weight: 1,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.4
+      };
+    } else {
+        return {
+          fillColor: getColor(0),
+          weight: 1,
+          opacity: 1,
+          color: 'white',
+          dashArray: '3',
+          fillOpacity: 0.4
+        };
+    }
   };
   
   const handleMouseOver = (e) => {
@@ -83,7 +110,33 @@ const Home = (props) => {
   };
   
   const handleClick = (e) => {
-    console.log('Clicked');
+    console.log(e.sourceTarget.options.id);
+    const countryName = e.sourceTarget.options.id;
+    if (countryCases[countryName]) {
+      setCurrentCountry({
+        name: countryName,
+        cases: numberFormat(countryCases[countryName].cases),
+        todayCases: numberFormat(countryCases[countryName].todayCases),
+        deaths: numberFormat(countryCases[countryName].deaths),
+        recovered: numberFormat(countryCases[countryName].recovered),
+        active: numberFormat(countryCases[countryName].active),
+        updated: new Date(countryCases[countryName].updated).toLocaleString()
+      });
+    } else {
+      setCurrentCountry({
+        name: countryName,
+        cases: 'Date unavailable',
+        todayCases: 'Date unavailable',
+        deaths: 'Date unavailable',
+        recovered: 'Date unavailable',
+        active: 'Date unavailable',
+        updated: 'Date unavailable'
+      });
+    }
+  };
+  
+  const numberFormat = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
   
   return (
@@ -104,6 +157,7 @@ const Home = (props) => {
         {countries.map((country) => {
           return <GeoJSON 
             key={country.properties.admin} 
+            id={country.properties.admin} 
             data={country} 
             style={style(country.properties.admin)}
             onMouseOver={handleMouseOver}
@@ -115,8 +169,16 @@ const Home = (props) => {
       )
       }
       <div>
-        
+        <p><strong>Country: </strong>{currentCountry.name}</p>
+        <p><strong>Cases: </strong>{currentCountry.cases}</p>
+        <p><strong>Today Cases: </strong>{currentCountry.todayCases}</p>
+        <p><strong>Deaths: </strong>{currentCountry.deaths}</p>
+        <p><strong>Recovered: </strong>{currentCountry.recovered}</p>
+        <p><strong>Active: </strong>{currentCountry.active}</p>
+        <p><strong>Last Updated: </strong>{currentCountry.updated}</p>
       </div>
+      <hr />
+      <Dashboard />
     </div>
   ); // return
 }; // Home
