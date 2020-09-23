@@ -29,7 +29,7 @@ const UserLogin = (props) => {
       localStorage.setItem('user', JSON.stringify(res.data.user));
       localStorage.setItem('token', res.data.token);
       axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
-      props.history.push('/home');
+      props.history.push('/world');
       window.location.reload();
     })
     .catch(err => {

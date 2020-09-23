@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Map, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
 import { Icon } from "leaflet";
 import axios from 'axios';
-import '../map.css';
+import '../worldMap.css';
 import Dashboard from './Dashboard';
 
-const Home = (props) => {
+const World = (props) => {
   
   const CASE_DATA_URL = "https://disease.sh/v3/covid-19/countries";
   const COUNTRY_GEOJSON_URL = 'http://localhost:1337/countries';
@@ -183,4 +183,4 @@ const Home = (props) => {
   ); // return
 }; // Home
 
-export default Home;
+export default World;

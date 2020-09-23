@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import UserLogin from './components/UserLogin';
 import UserSignup from './components/UserSignup';
 import AdminLogin from './components/AdminLogin';
-import Home from './components/Home';
+import World from './components/World';
+import Sydney from './components/Sydney';
 import Cases from './components/Cases';
 import CreateCase from './components/CreateCase';
 import EditCase from './components/EditCase';
@@ -48,12 +49,13 @@ const App = (props) => {
       <div>
         <Router>
           <nav>
-            <Link to={'/home'}>Logo</Link>
+            <Link to={'/world'}>Logo</Link>
 
             {currentUser || currentAdmin ? (
               <div>
-                <li><Link to='/home'>Home</Link></li>
+                <li><Link to='/world'>World</Link></li>
                 <li><Link to='/cases'>Cases</Link></li>
+                <li><Link to='/sydney'>Sydney</Link></li>
                 {
                   currentAdmin && <li><Link to={`/admin/profile/${currentAdmin._id}`}>Your Cases</Link></li>
                 }
@@ -66,7 +68,8 @@ const App = (props) => {
               </div>
             )}
           </nav>
-          <Route exact path='/home' component={Home} />
+          <Route exact path='/world' component={World} />
+          <Route exact path='/sydney' component={Sydney} />
           <Route exact path={['/', '/user/login']} component={UserLogin} />
           <Route exact path='/user/signup' component={UserSignup} />
           <Route exact path='/admin/login' component={AdminLogin} />
