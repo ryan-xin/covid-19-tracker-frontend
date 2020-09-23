@@ -10,6 +10,7 @@ import Cases from './components/Cases';
 import CreateCase from './components/CreateCase';
 import EditCase from './components/EditCase';
 import AdminProfile from './components/AdminProfile';
+import ThankYou from './components/ThankYou';
 import axios from 'axios';
 
 const App = (props) => {
@@ -77,6 +78,7 @@ const App = (props) => {
           <Route exact path='/cases' component={Cases} />
           <Route exact path='/cases/create' component={CreateCase} />
           <Route exact path='/cases/edit/:caseId' component={EditCase} />
+          <Route exact path='/thankyoutoourheros' component={ThankYou} />
           <div>
             <hr />
             <footer>

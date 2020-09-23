@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ThankYou from './ThankYou';
 
 const Dashboard = (props) => {
   
@@ -15,10 +16,16 @@ const Dashboard = (props) => {
     updated: '-'
   });
   
+  // const [showThankYou, setShowThankYou] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(true);
+  
   useEffect(() => {
     axios.get(WORLD_CASE_DATA_URL)
     .then(res => {
       console.log(res.data);
+      if (res.data.cases === 0) {
+        setShowThankYou(true);
+      }
       setWorld({
         cases: numberFormat(res.data.cases),
         todayCases: numberFormat(res.data.todayCases),
@@ -40,32 +47,35 @@ const Dashboard = (props) => {
   
   return(
     <div>
+      { showThankYou && <ThankYou />}
       <div>
-        <h5>Total Cases</h5>
-        <h2>{world.cases}</h2>
-      </div>
-      <div>
-        <h5>Today Cases</h5>
-        <h2>{world.todayCases}</h2>
-      </div>
-      <div>
-        <h5>Active Cases</h5>
-        <h2>{world.active}</h2>
-      </div>
-      <div>
-        <h5>Deaths</h5>
-        <h2>{world.deaths}</h2>
-      </div>
-      <div>
-        <h5>Recovered</h5>
-        <h2>{world.recovered}</h2>
-      </div>
-      <div>
-        <h5>Affected Countries</h5>
-        <h2>{world.affectedCountries}</h2>
-      </div>
-      <div>
-        <p><strong>Last Update: </strong>{world.updated}</p>
+        <div>
+          <h5>Total Cases</h5>
+          <h2>{world.cases}</h2>
+        </div>
+        <div>
+          <h5>Today Cases</h5>
+          <h2>{world.todayCases}</h2>
+        </div>
+        <div>
+          <h5>Active Cases</h5>
+          <h2>{world.active}</h2>
+        </div>
+        <div>
+          <h5>Deaths</h5>
+          <h2>{world.deaths}</h2>
+        </div>
+        <div>
+          <h5>Recovered</h5>
+          <h2>{world.recovered}</h2>
+        </div>
+        <div>
+          <h5>Affected Countries</h5>
+          <h2>{world.affectedCountries}</h2>
+        </div>
+        <div>
+          <p><strong>Last Update: </strong>{world.updated}</p>
+        </div>
       </div>
     </div>
   );
