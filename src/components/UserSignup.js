@@ -93,7 +93,7 @@ const UserSignup = (props) => {
   }; // handleSignup
   
   return(
-    <div>
+    <div className = "content" >
       <h1>User Signup</h1>
       <form>
         <label>Name:</label>
@@ -106,7 +106,7 @@ const UserSignup = (props) => {
         <input type="text" name="confirmPassword" onChange={handleChange}/>
         <label>Suburb:</label>
         <AutocompleteSuburb onSelectSuburb={handleSelectSuburb}/>
-        <input type="Submit" placeholder="Login" onClick={handleSignup} />
+        <input type="Submit" placeholder="Login" className="button_primary" onClick={handleSignup} />
       </form>
       <div className="errorMessage">
         <p>{validationErrors.blankField}</p>

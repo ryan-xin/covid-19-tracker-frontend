@@ -1,0 +1,44 @@
+.dashboard {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 100px;
+  max-width: 1400px;
+  width: 80%;
+  margin: 0 auto;
+  height: auto;
+  padding: 10px 0;
+  overflow: auto;
+  z-index: 1000;
+  color: white;
+  border-radius: 20px;
+}
+
+.dashboard_wrapper {
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.flex-container * {
+  text-align: center;
+}
+
+.flex-item {
+  margin: 20px;
+  width: 33%;
+  height: 60px;
+}
+
+.dashboard h1 {
+  color: #FF5622;
+  margin-top: 10px;
+}
+
+.update_time {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

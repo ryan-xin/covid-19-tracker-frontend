@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import axios from 'axios';
+import io from 'socket.io-client';
 import UserLogin from './components/UserLogin';
 import UserSignup from './components/UserSignup';
 import AdminLogin from './components/AdminLogin';
@@ -11,8 +13,6 @@ import EditCase from './components/EditCase';
 import AdminProfile from './components/AdminProfile';
 import ThankYou from './components/ThankYou';
 import PrivateRoute from './components/PrivateRoute';
-import axios from 'axios';
-import io from 'socket.io-client';
 
 const App = (props) => {
   
@@ -63,29 +63,38 @@ const App = (props) => {
   }, []);
   
   return (
-    <div>
+    <div className="html">
+    <div className="body">
       {
       readyToRoute && (
       <div>
         <Router>
-          <div>
-            <Link to={'/world'}><img src='/logo.svg' alt='logo' /></Link>
-            {currentUser || currentAdmin ? (
-              <div>
-                <li><Link to='/world'>World</Link></li>
-                <li><Link to='/sydney'>Sydney</Link></li>
-                {
-                  currentAdmin && <li><Link to={`/admin/profile/${currentAdmin._id}`}>Your Cases</Link></li>
-                }
-                <li><a href='/logout' onClick={logout}>Logout</a></li>
+          <nav>
+            <div className="nav_wrapper">
+              <div className="nav_left">
+                <Link to={'/world'}><img src='/logo.svg' alt='logo' className="logo" /></Link>
               </div>
-            ) : (
-              <div>
-                <li><Link to='/user/login'>Login</Link></li>
-                <li><Link to='/user/signup'>Sign Up</Link></li>
+              <div className="nav_right">
+              <ul>
+              {currentUser || currentAdmin ? (
+                <div>
+                  <li><Link to='/world'>World Cases</Link></li>
+                  <li><Link to='/sydney'>Nearby Cases</Link></li>
+                  {
+                    currentAdmin && <li><Link to={`/admin/profile/${currentAdmin._id}`}>Your Cases</Link></li>
+                  }
+                  <li><a href='/logout' onClick={logout}>Logout</a></li>
+                </div>
+              ) : (
+                <div>
+                  <li><Link to='/user/login'>Login</Link></li>
+                  <li><Link to='/user/signup'>Sign Up</Link></li>
+                </div>
+              )}
+              </ul>
               </div>
-            )}
-          </div>
+            </div>
+          </nav>
           <PrivateRoute exact path={['/', '/world']} component={World} />
           <PrivateRoute exact path='/sydney' component={Sydney} />
           <Route exact path='/user/login' component={UserLogin} />
@@ -96,18 +105,21 @@ const App = (props) => {
           <PrivateRoute exact path='/cases/create' component={CreateCase} />
           <PrivateRoute exact path='/cases/edit/:caseId' component={EditCase} />
           <Route exact path='/thankyoutoourheros' component={ThankYou} />
-          <div>
-            <hr />
-            <footer>
+          <footer>
+            <div className="footer_wrapper">
+              <div className="footer_left">
               <ul>
-                <li>Copyright &copy; 2020 GA-SEI 37 by Ryan Xin</li>
-                <li><a target="_blank" href="https://www.linkedin.com/in/ryan-xin/">LinkedIn</a></li>
-                <li><a target="_blank" href="https://github.com/ryan-xin/wdywt">GitHub</a></li>
-                { !currentAdmin && <li><Link to='/admin/login'>Admin Login</Link></li>
-                }
+              <li>Copyright &copy; 2020 GA-SEI 37 by Ryan Xin</li>
+              <li><a target="_blank" href="https://www.linkedin.com/in/ryan-xin/">LinkedIn</a></li>
+              <li><a target="_blank" href="https://github.com/ryan-xin">GitHub</a></li>
               </ul>
-            </footer>
-          </div>
+              </div>
+              <div className="footer_right">
+              { !currentAdmin && <p><Link to='/admin/login'>Admin Login</Link></p>
+              }
+              </div>
+            </div>
+          </footer>
           {(hasNotification && currentUser) && 
             <div>
               <h4>New Case:</h4>
@@ -122,6 +134,7 @@ const App = (props) => {
       </div>
       )
       }
+    </div>
     </div>
   ) // return
 }; // App

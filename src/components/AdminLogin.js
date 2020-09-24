@@ -40,14 +40,14 @@ const AdminLogin = (props) => {
   }; // handleLogin
   
   return(
-    <div>
+    <div className="content">
       <h1>Admin Login</h1>
       <form>
         <label>Email:</label>
         <input type="text" onChange={handleEmailInput}/>
         <label>Password:</label>
         <input type="text" onChange={handlePasswordInput}/>
-        <input type="Submit" placeholder="Login" onClick={handleLogin} />
+        <input type="Submit" placeholder="Login" className="button_primary" onClick={handleLogin} />
       </form>
       <div className="errorMessage">
         <p>{errorMessage}</p>

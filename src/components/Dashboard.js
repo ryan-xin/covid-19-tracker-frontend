@@ -46,37 +46,41 @@ const Dashboard = (props) => {
   };
   
   return(
-    <div>
+    <div className="dashboard">
       { showThankYou && <ThankYou />}
-      <div>
-        <div>
-          <h5>Total Cases</h5>
-          <h2>{world.cases}</h2>
+      {/* <div className="dashboard_wrapper"> */}
+      <div className="flex-container">
+        <div className="flex-item">
+          <h4>Total Cases</h4>
+          <h1>{world.cases}</h1>
         </div>
-        <div>
-          <h5>Today Cases</h5>
-          <h2>{world.todayCases}</h2>
+        <div className = "flex-item">
+          <h4>Today Cases</h4>
+          <h1>{world.todayCases}</h1>
         </div>
-        <div>
-          <h5>Active Cases</h5>
-          <h2>{world.active}</h2>
-        </div>
-        <div>
-          <h5>Deaths</h5>
-          <h2>{world.deaths}</h2>
-        </div>
-        <div>
-          <h5>Recovered</h5>
-          <h2>{world.recovered}</h2>
-        </div>
-        <div>
-          <h5>Affected Countries</h5>
-          <h2>{world.affectedCountries}</h2>
-        </div>
-        <div>
-          <p><strong>Last Update: </strong>{world.updated}</p>
+        <div className = "flex-item">
+          <h4>Active Cases</h4>
+          <h1>{world.active}</h1>
         </div>
       </div>
+      <div className="flex-container">
+        <div className = "flex-item" >
+          <h4>Deaths</h4>
+          <h1>{world.deaths}</h1>
+        </div>
+        <div className = "flex-item" >
+          <h4>Recovered</h4>
+          <h1>{world.recovered}</h1>
+        </div>
+        <div className = "flex-item" >
+          <h4>Affected Countries</h4>
+          <h1>{world.affectedCountries}</h1>
+        </div>
+      </div>
+      <div className="update_time">
+        <p><strong>Last Update: </strong>{world.updated}</p>
+      </div>
+      {/* </div> */}
     </div>
   );
 };

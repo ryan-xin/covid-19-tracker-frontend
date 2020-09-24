@@ -72,6 +72,7 @@ const Sydney = (props) => {
   
   return(
     <div>
+    <div className="map_container">
       <Map center={[currentLocation.lat, currentLocation.lng]} zoom={13}>
         <TileLayer
           url="https://api.mapbox.com/styles/v1/ryanxin/ckfdup3bt0d5p19rtln7yawiw/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnlhbnhpbiIsImEiOiJja2ZkdTFhajQwNDh6MnRzaG51ZHFsenByIn0.eqvLzhrjtwg78imgHDi6SQ"
@@ -88,12 +89,17 @@ const Sydney = (props) => {
         ))}
         <Marker position={[currentLocation.lat, currentLocation.lng]} />
       </Map>
-      <div>
-        <p><strong>Suburb: </strong>{currentCase.suburb}</p>
-        <p><strong>Location: </strong>{currentCase.location}</p>
-        <p><strong>Date: </strong>{currentCase.day} {currentCase.month} {currentCase.year}</p>
-        <p><strong>From </strong>{currentCase.startTime}<strong> to </strong>{currentCase.endTime}</p>
+      <div div className = "stats_panel" >
+        <p><strong>Suburb: </strong></p>
+        <h4>{currentCase.suburb}</h4>
+        <p><strong>Location: </strong></p>
+        <h4>{currentCase.location}</h4>
+        <p><strong>Date: </strong></p>
+        <h4>{currentCase.day} {currentCase.month} {currentCase.year}</h4>
+        <p><strong>Time:</strong></p>
+        <h4>From {currentCase.startTime}<strong> to </strong>{currentCase.endTime}</h4>
       </div>
+    </div>
     </div>
   )
 }; // Sydney
