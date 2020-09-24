@@ -93,7 +93,7 @@ const UserSignup = (props) => {
   }; // handleSignup
   
   return(
-    <div className = "content" >
+    <div className = "content">
       <h1>User Signup</h1>
       <form>
         <label>Name:</label>

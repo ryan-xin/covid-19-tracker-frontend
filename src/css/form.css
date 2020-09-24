@@ -1,11 +1,12 @@
 form {
-  margin: 20px 0 20px 0;
+  margin: 20px 0 120px 0;
   font-size: 16px;
 }
 
 label {
   display: block;
   font-weight: bold;
+  color: white;
 }
 
 input {
@@ -13,13 +14,13 @@ input {
   border: 0px;
   height: 40px;
   display: block;
-  width: 50%;
+  width: 100%;
   margin: 15px 0 20px 0;
   padding: 0 30px;
   border-radius: 20px;
   font-size: 16px;
   color: #222222;
-  border: 1px solid white;
+  border: 1px solid #171717;
 }
 
 input:focus {
@@ -28,21 +29,12 @@ input:focus {
   border: 1px solid #FE9102
 }
 
-textarea {
-  background-color: #f0f0f0;
-  border: 0px;
-  display: block;
-  width: 100%;
-  margin: 10px 0 20px 0;
-  padding: 15px;
-}
-
 select {
+  border-radius: 20px;
   height: 40px;
   padding: 0 15px;
   font-size: 16px;
-  border-radius: 0;
-  margin-top: 10px;
+  margin: 15px 0 20px;
 }
 
 .button_primary {
@@ -51,7 +43,7 @@ select {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  width: 50%;
+  width: 100%;
   padding: 0 20px;
   font-size: 16px;
   transition: 0.3s;
@@ -64,4 +56,15 @@ select {
 .errorMessage {
   font-size: 16px;
   color: red;
+}
+
+.form_container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  flex-basis: 0;
+}
+.form_container_item {
+  flex: auto;
+  margin-right: 15px;
 }

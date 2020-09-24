@@ -1,25 +1,22 @@
 .dashboard {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(16, 16, 16, 0.8);
   position: absolute;
-  bottom: 100px;
-  max-width: 1400px;
-  width: 80%;
+  bottom: 70px;
+  left: 20px;
+  right: 20px;
+  max-width: 100%;
   margin: 0 auto;
   height: auto;
-  padding: 10px 0;
-  overflow: auto;
+  padding: 20px 0;
   z-index: 1000;
   color: white;
   border-radius: 20px;
 }
 
-.dashboard_wrapper {
-}
-
 .flex-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .flex-container * {
@@ -27,18 +24,24 @@
 }
 
 .flex-item {
-  margin: 20px;
+  margin: 10px;
   width: 33%;
   height: 60px;
 }
 
 .dashboard h1 {
-  color: #FF5622;
+  font-size: 36px;
+  color: #FE9102;
   margin-top: 10px;
 }
 
+.dashboard_wrapper {
+  position: relative;
+}
+
 .update_time {
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  position: absolute;
+  right: 25px;
+  bottom: 0;
+  text-align: right;
 }

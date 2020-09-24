@@ -11,9 +11,9 @@ nav {
 }
 
 .nav_wrapper {
-  max-width: 1400px;
-  width: 80%;
-  margin: 0 auto;
+  /* max-width: 1400px; */
+  /* width: 80%; */
+  margin: 0 30px;
   height: 100px;
 }
 
@@ -26,12 +26,13 @@ nav {
 .nav_right {
   display: inline-block;
   float: right;
+  margin-left: 20px;
   line-height: 100px;
 }
 
 nav li {
   display: inline-block;
-  padding-left: 30px;
+  padding: 0 30px;
 }
 
 nav a {
@@ -52,9 +53,9 @@ footer {
 }
 
 .footer_wrapper {
-  max-width: 1400px;
-  width: 80%;
-  margin: 0 auto;
+  /* max-width: 1400px; */
+  /* width: 80%; */
+  margin: 0 30px;
   height: 50px;
 }
 

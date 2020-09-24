@@ -8,6 +8,7 @@ import './css/app.css';
 import './css/form.css';
 import './css/worldMap.css';
 import './css/dashboard.css';
+import './css/adminProfile.css';
 
 ReactDOM.render(
   <Router>

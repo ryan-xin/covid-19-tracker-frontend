@@ -75,7 +75,7 @@ const World = (props) => {
       return {
         fillColor: getColor(countryCases[countryName].cases),
         weight: 1,
-        opacity: 1,
+        opacity: 0.6,
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.5
@@ -84,7 +84,7 @@ const World = (props) => {
         return {
           fillColor: getColor(0),
           weight: 1,
-          opacity: 1,
+          opacity: 0.6,
           color: 'white',
           dashArray: '3',
           fillOpacity: 0.5
@@ -94,7 +94,7 @@ const World = (props) => {
   
   const handleMouseOver = (e) => {
     e.target.setStyle({
-      weight: 3,
+      weight: 2,
       fillOpacity: 0.6
     })
   };

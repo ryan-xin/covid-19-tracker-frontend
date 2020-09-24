@@ -1,0 +1,72 @@
+.admin_cases {
+  max-width: 1400px;
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 140px;
+  
+}
+
+.table {
+  display: grid;
+  grid-template-columns: 2fr 5fr 2fr 2fr 1fr 1fr;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white;
+}
+
+.admin_header {
+  position: relative;
+}
+
+.button_addcase {
+  position: absolute;
+  right: 0;
+  top: 12px;
+}
+
+.button_secondary {
+  font-size: 16px;
+  color: white;
+  padding: 10px 20px;
+  background-color: #FE9102;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.button_secondary:hover {
+  background-color: #FF5622;
+  color: white;
+}
+
+.header {
+  background-color: #FF5622;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 30px;
+  padding: 15px 30px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.row {
+  font-size: 18px;
+  padding: 15px 30px;
+  text-align: left;
+}
+
+.row:hover {
+  background-color: #333333;
+  border-radius: 30px;
+}
+
+.button_third {
+  color: #FE9102;
+  transition: 0.3s;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.button_third:hover {
+  color: #FF5622;
+}

@@ -48,7 +48,11 @@ const Dashboard = (props) => {
   return(
     <div className="dashboard">
       { showThankYou && <ThankYou />}
-      {/* <div className="dashboard_wrapper"> */}
+      <div className="dashboard_wrapper">
+      <div className="update_time">
+        <p>Last Update:</p>
+        <h5>{world.updated}</h5>
+      </div>
       <div className="flex-container">
         <div className="flex-item">
           <h4>Total Cases</h4>
@@ -77,10 +81,7 @@ const Dashboard = (props) => {
           <h1>{world.affectedCountries}</h1>
         </div>
       </div>
-      <div className="update_time">
-        <p><strong>Last Update: </strong>{world.updated}</p>
       </div>
-      {/* </div> */}
     </div>
   );
 };

@@ -4,6 +4,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #171717;
 }
 
 code {
@@ -20,6 +21,7 @@ html, body, div, nav, header, footer, ul, li, label, input, textarea, button, h1
 h1 {
   font-size: 40px;
   margin-bottom: 40px;
+  color: white;
 }
 
 p {
@@ -51,12 +53,12 @@ textarea {
 }
 
 .content {
-  max-width: 1400px;
-  width: 80%;
+  /* max-width: 1400px; */
+  width: 40%;
   margin: 0 auto;
-  /* padding-top: 140px; */
+  padding-top: 140px;
 }
 
-html {
+/* html {
   overflow-y: scroll;
-}
+} */

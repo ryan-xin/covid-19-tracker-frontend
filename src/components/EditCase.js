@@ -126,38 +126,52 @@ const EditCase = (props) => {
   }, []);
   
   return(
-    <div>
+    <div className = "content">
       <h1>Edit Case</h1>
       <form>
         <label>Suburb:</label>
         <AutocompleteSuburb onSelectSuburb={handleSelectSuburb} preSuburb={form.suburb}/>
         <label>Location:</label>
         <AutocompleteLocation onSelectLocation={handleSelectLocation} preLocation={form.location}/>
-        <label>Day:</label>
-        <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange} defaultValue={form.day} />
-        <label>Month:</label>
-        <select type="text" name="month" value={form.month} placeholder="e.g. January" onChange={handleChange}>
-          <option value="">Select...</option>
-          <option value="January">January</option>
-          <option value="February">February</option>
-          <option value="March">March</option>
-          <option value="April">April</option>
-          <option value="May">May</option>
-          <option value="June">June</option>
-          <option value="July">July</option>
-          <option value="August">August</option>
-          <option value="September">September</option>
-          <option value="October">October</option>
-          <option value="November">November</option>
-          <option value="December">December</option>
-        </select>
-        <label>Year:</label>
-        <input type="text" name="year" placeholder="e.g. 2020" onChange={handleChange} defaultValue={form.year} />
-        <label>Start Time:</label>
-        <input type="text" name="startTime" placeholder="e.g. 11:00am" onChange={handleChange} defaultValue={form.startTime} />
-        <label>End Time:</label>
-        <input type="text" name="endTime" placeholder="e.g. 2:00pm" onChange={handleChange} defaultValue={form.endTime} />
-        <input type="Submit" placeholder="Create" onClick={handleUpdate} />        
+        <div className="form_container">
+          <div className="form_container_item">
+            <label>Day:</label>
+            <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange} defaultValue={form.day} />
+          </div>
+          <div className="form_container_item">
+            <label>Month:</label>
+            <select type="text" name="month" value={form.month} placeholder="e.g. January" onChange={handleChange}>
+              <option value="">Select...</option>
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+            </select>
+          </div>
+          <div className = "form_container_item" >
+            <label>Year:</label>
+            <input type="text" name="year" placeholder="e.g. 2020" onChange={handleChange} defaultValue={form.year} />
+          </div>
+        </div>
+        <div className="form_container">
+          <div className="form_container_item">
+            <label>Start Time:</label>
+            <input type="text" name="startTime" placeholder="e.g. 11:00am" onChange={handleChange} defaultValue={form.startTime} />
+          </div>
+          <div div className = "form_container_item" >
+            <label>End Time:</label>
+            <input type="text" name="endTime" placeholder="e.g. 2:00pm" onChange={handleChange} defaultValue={form.endTime} />
+          </div>
+        </div>
+        <input type="Submit" className="button_primary" placeholder="Create" onClick={handleUpdate} />        
       </form>
       <div className="errorMessage">
         <p>{validationErrors.blankField}</p>

@@ -17,8 +17,15 @@ const UserLogin = (props) => {
     setPassword(e.target.value);
   }; // handlePasswordInput
   
+  const logout = (e) => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('admin');
+    localStorage.removeItem('token');
+  };
+  
   const handleLogin = (e) => {
     e.preventDefault();
+    logout();
     console.log('Login Submitted');
     axios.post(USER_LOGIN_URL, {
       email: email,

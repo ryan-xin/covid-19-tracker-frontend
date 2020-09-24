@@ -26,7 +26,12 @@ const Sydney = (props) => {
   
   const caseIcon = new Icon({
     iconUrl: "/caseIcon.svg",
-    iconSize: [25, 25]
+    iconSize: [40, 40]
+  });
+
+  const userIcon = new Icon({
+    iconUrl: "/userIcon.svg",
+    iconSize: [50, 50]
   });
   
   const handleClick = (e) => {
@@ -87,7 +92,7 @@ const Sydney = (props) => {
             onClick={handleClick}
           />
         ))}
-        <Marker position={[currentLocation.lat, currentLocation.lng]} />
+        <Marker icon={userIcon} position={[currentLocation.lat, currentLocation.lng]} />
       </Map>
       <div div className = "stats_panel" >
         <p><strong>Suburb: </strong></p>

@@ -36,26 +36,29 @@ const AdminProfile = (props) => {
   }, []); // useEffect
   
   return(
-    <div>
-      <h1>Admin Cases</h1>
-      <button><Link to={'/cases/create'}>Add Case</Link></button>
-      <div className="container header">
+    <div className="admin_cases">
+      <div className="admin_header">
+        <h1>Admin Cases</h1>
+        <Link className="button_secondary button_addcase" to={'/cases/create'}>Add Case</Link>
+      </div>
+      <div className="table header">
         <div>Suburb</div>
         <div>Location</div>
         <div>Date</div>
         <div>Time</div>
+        <div></div>
+        <div></div>
       </div>
       {
         adminCases.reverse().map(c => {
         return (
-          <div key={c._id} className="container result">
+          <div key={c._id} className="table row">
             <div>{c.suburb}</div>
             <div>{c.location}</div>
-            <div>{c.day}</div>
-            <div>{c.startTime}</div>
-            <div></div>
-            <Link to={`/cases/edit/${c._id}`}>Edit</Link>
-            <div id={c._id} onClick={handleDelete}>Delete</div>
+            <div>{c.day} {c.month} {c.year}</div>
+            <div>{c.startTime} - {c.endTime}</div>
+            <Link className="button_third" to={`/cases/edit/${c._id}`}>Edit</Link>
+            <div id={c._id} className="button_third" onClick={handleDelete}>Delete</div>
           </div>
         )})
       }
