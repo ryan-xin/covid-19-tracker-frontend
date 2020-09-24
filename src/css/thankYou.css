@@ -1,0 +1,52 @@
+.thank_you {
+  position: absolute;
+  background-image: url("/thankyou.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000000000;
+  color: white;
+  text-align: center;
+  padding: 100px;
+}
+
+.thank_you_wrapper {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.thank_you h1 {
+  font-size: 90px;
+  margin: 60px 0;
+}
+
+.thank_you h4 {
+  font-size: 30px;
+}
+
+.thank_you h3 {
+  font-size: 30px;
+  line-height: 40px;
+}
+
+.button_thankyou {
+  font-size: 24px;
+  background-color: #fff;
+  font-weight: bold;
+  border: 0px;
+  padding: 20px 30px;
+  border-radius: 40px;
+  margin-top: 60px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.button_thankyou:hover {
+  background-color: #FE9102;
+  color: white;
+}

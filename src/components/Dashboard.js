@@ -19,6 +19,10 @@ const Dashboard = (props) => {
   const [showThankYou, setShowThankYou] = useState(false);
   // const [showThankYou, setShowThankYou] = useState(true);
   
+  const handleThankYou = () =>{
+    setShowThankYou(false);
+  };
+  
   useEffect(() => {
     axios.get(WORLD_CASE_DATA_URL)
     .then(res => {
@@ -46,8 +50,9 @@ const Dashboard = (props) => {
   };
   
   return(
+    <div>
+    { showThankYou && <ThankYou onHandleThankYou={handleThankYou}/>}
     <div className="dashboard">
-      { showThankYou && <ThankYou />}
       <div className="dashboard_wrapper">
       <div className="update_time">
         <p>Last Update:</p>
@@ -82,6 +87,7 @@ const Dashboard = (props) => {
         </div>
       </div>
       </div>
+    </div>
     </div>
   );
 };

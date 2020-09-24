@@ -11,6 +11,7 @@ import './css/dashboard.css';
 import './css/adminProfile.css';
 import './css/autocomplete.css';
 import './css/notification.css';
+import './css/thankYou.css';
 
 ReactDOM.render(
   <Router>

@@ -14,6 +14,7 @@ const Sydney = (props) => {
     lat: 0,
     lng: 0
   })
+  
   const [currentCase, setCurrentCase] = useState({
     suburb: '-',
     location: '-',
@@ -57,11 +58,11 @@ const Sydney = (props) => {
   // TODO: trigger rerender
   useEffect(() => {
     axios.get(ALL_CASES_URL)
-      .then(res => {
-        console.log(res.data);
-        setCases(res.data);
-      })
-      .catch(err => console.log(err)); // axios get cases
+    .then(res => {
+      console.log(res.data);
+      setCases(res.data);
+    })
+    .catch(err => console.log(err)); // axios get cases
   }, [cases.length])
   
   useEffect(() => {
@@ -94,7 +95,7 @@ const Sydney = (props) => {
         ))}
         <Marker icon={userIcon} position={[currentLocation.lat, currentLocation.lng]} />
       </Map>
-      <div div className = "stats_panel" >
+      <div className = "stats_panel">
         <p><strong>Suburb: </strong></p>
         <h4>{currentCase.suburb}</h4>
         <p><strong>Location: </strong></p>
