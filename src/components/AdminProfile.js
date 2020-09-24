@@ -24,7 +24,7 @@ const AdminProfile = (props) => {
     })
     .catch(err => console.log(err)); // axios get cases
   }; // handleDelete
-  
+      
   useEffect(() => {
     axios.get(`${ADMIN_CASES_URL}/${props.match.params.adminId}`)
     .then(res => {

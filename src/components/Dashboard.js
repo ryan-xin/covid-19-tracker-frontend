@@ -16,8 +16,8 @@ const Dashboard = (props) => {
     updated: '-'
   });
   
-  // const [showThankYou, setShowThankYou] = useState(false);
-  const [showThankYou, setShowThankYou] = useState(true);
+  const [showThankYou, setShowThankYou] = useState(false);
+  // const [showThankYou, setShowThankYou] = useState(true);
   
   useEffect(() => {
     axios.get(WORLD_CASE_DATA_URL)

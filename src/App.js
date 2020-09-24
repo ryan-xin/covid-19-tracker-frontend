@@ -12,17 +12,24 @@ import AdminProfile from './components/AdminProfile';
 import ThankYou from './components/ThankYou';
 import PrivateRoute from './components/PrivateRoute';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 const App = (props) => {
   
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentAdmin, setCurrentAdmin] = useState(undefined);
   const [readyToRoute, setReadyToRoute] = useState(false);
+  const [hasNotification, setHasNotification] = useState(false);
+  const [newCase, setNewCase] = useState('');
 
   const logout = (e) => {
     localStorage.removeItem('user');
     localStorage.removeItem('admin');
     localStorage.removeItem('token');
+  };
+  
+  const hideNotification = (e) => {
+    setHasNotification(false);
   };
   
   useEffect(() => {
@@ -41,6 +48,18 @@ const App = (props) => {
     if (admin) {
       setCurrentAdmin(admin);
     }
+    
+    // TODO: make connection when logged in
+    const socket = io('http://localhost:1337');
+    socket.on('connect', () => {
+      console.log('Websocket connection established!');
+    }); // on socket connect    
+
+    socket.on('notification', data => {
+      console.log('notification', data);
+      setHasNotification(true);
+      setNewCase(data.case);
+    });
   }, []);
   
   return (
@@ -89,6 +108,16 @@ const App = (props) => {
               </ul>
             </footer>
           </div>
+          {(hasNotification && currentUser) && 
+            <div>
+              <h4>New Case:</h4>
+              <p><strong>Suburb: </strong>{newCase.suburb}</p>
+              <p><strong>Location: </strong>{newCase.location}</p>
+              <p><strong>Date: </strong>{newCase.day} {newCase.month} {newCase.year}</p>
+              <p><strong>From </strong>{newCase.startTime}<strong> to </strong>{newCase.endTime}</p>
+              <button onClick={hideNotification}>Got it.</button>
+            </div>
+          }
         </Router>
       </div>
       )

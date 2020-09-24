@@ -42,7 +42,6 @@ const CreateCase = (props) => {
       yearFormat: '',
       timeFormat: ''
     });
-    console.log('Case create submitted');
     const errors = {};
     let validation = true;
     if (form.suburb === '' || form.location === '' || form.day === '' || form.month === '' || form.year === '' || form.startTime === '' || form.endTime === '') {
@@ -73,7 +72,7 @@ const CreateCase = (props) => {
   const handleCreate = (e) => {
     e.preventDefault();
     console.log('Case create submitted');
-    const admin = JSON.parse(localStorage.getItem('admin'));
+    // const admin = JSON.parse(localStorage.getItem('admin'));
     if (formValidation()) {
       axios.post(CREATE_CASE_URL, {
         suburb: form.suburb,
@@ -85,13 +84,12 @@ const CreateCase = (props) => {
         endTime: form.endTime,
         lat: form.lat,
         lng: form.lng,
-        adminID: admin._id
+        // adminID: admin._id
       })
       .then(res => {
         console.log(res.data);
         const admin = JSON.parse(localStorage.getItem('admin'));
         props.history.push(`/admin/profile/${admin._id}`);
-        // window.location.reload();
       })
       .catch(err => console.log(err)); // axios post
     }

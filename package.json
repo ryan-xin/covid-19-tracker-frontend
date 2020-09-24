@@ -16,6 +16,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-validation": "^3.0.7",
+    "reactstrap": "^8.6.0",
+    "socket.io": "^2.3.0",
     "use-places-autocomplete": "^1.5.0",
     "validator": "^13.1.17"
   },

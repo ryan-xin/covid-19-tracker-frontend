@@ -15,7 +15,7 @@ const Cases = (props) => {
       setCases(res.data);
     })
     .catch(err => console.log(err)); // axios get cases
-  }, [])
+  }, [cases.length])
   
   return(
     <div>

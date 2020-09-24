@@ -49,6 +49,7 @@ const Sydney = (props) => {
     .catch(err => console.log(err));
   }; 
   
+  // TODO: trigger rerender
   useEffect(() => {
     axios.get(ALL_CASES_URL)
       .then(res => {
