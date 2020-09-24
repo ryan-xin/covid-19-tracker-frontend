@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
 import UserLogin from './components/UserLogin';
@@ -22,10 +22,15 @@ const App = (props) => {
   const [hasNotification, setHasNotification] = useState(false);
   const [newCase, setNewCase] = useState('');
 
+  const history = useHistory();
+  
   const logout = (e) => {
+    setCurrentUser(undefined);
+    setCurrentAdmin(undefined);
     localStorage.removeItem('user');
     localStorage.removeItem('admin');
     localStorage.removeItem('token');
+    history.push("/user/login");
   };
   
   const hideNotification = (e) => {
@@ -33,7 +38,7 @@ const App = (props) => {
   };
   
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     if (token) {
       console.log('Use stored token', token);
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -60,7 +65,7 @@ const App = (props) => {
       setHasNotification(true);
       setNewCase(data.case);
     });
-  }, []);
+  }, [localStorage.getItem('token')]);
   
   return (
     <div>
@@ -71,7 +76,7 @@ const App = (props) => {
           <nav>
             <div className="nav_wrapper">
               <div className="nav_left">
-                <Link to={'/world'}><img src='/logo.svg' alt='logo' className="logo" /></Link>
+                <Link to={'/world'}><img src='./logo.svg' alt='logo' className="logo" /></Link>
               </div>
               <div className="nav_right">
               <ul>
@@ -82,7 +87,7 @@ const App = (props) => {
                   {
                     currentAdmin && <li><Link to={`/admin/profile/${currentAdmin._id}`}>Your Cases</Link></li>
                   }
-                  <li><a href='/logout' onClick={logout}>Logout</a></li>
+                  <li><a onClick={logout}>Logout</a></li>
                 </div>
               ) : (
                 <div>

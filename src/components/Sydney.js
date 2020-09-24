@@ -26,12 +26,12 @@ const Sydney = (props) => {
   });
   
   const caseIcon = new Icon({
-    iconUrl: "/caseIcon.svg",
+    iconUrl: "./caseIcon.svg",
     iconSize: [40, 40]
   });
 
   const userIcon = new Icon({
-    iconUrl: "/userIcon.svg",
+    iconUrl: "./userIcon.svg",
     iconSize: [50, 50]
   });
   
