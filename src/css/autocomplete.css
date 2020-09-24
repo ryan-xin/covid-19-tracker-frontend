@@ -1,0 +1,32 @@
+.auto_wrapper {
+  position: relative;
+}
+
+.auto_list_outer {
+  position: absolute;
+  top: 50px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  color: #171717;
+  padding: 17px 0px 17px 30px;
+  height: 334px;
+  width: 100%;
+  z-index: 1000;
+}
+
+.auto_list_inner {
+  height: 300px;
+  width: 100%;
+  overflow: auto;
+}
+
+.auto_list_inner li {
+  margin: 10px 0;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.auto_list_inner li:hover {
+  color: #FF5622;
+}

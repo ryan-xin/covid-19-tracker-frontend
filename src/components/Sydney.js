@@ -11,8 +11,8 @@ const Sydney = (props) => {
   
   const [cases, setCases] = useState([]);
   const [currentLocation, setCurrentLocation] = useState({
-    lat: -33.86785,
-    lng: 151.20732
+    lat: 0,
+    lng: 0
   })
   const [currentCase, setCurrentCase] = useState({
     suburb: '-',

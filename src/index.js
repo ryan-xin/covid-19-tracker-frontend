@@ -9,6 +9,8 @@ import './css/form.css';
 import './css/worldMap.css';
 import './css/dashboard.css';
 import './css/adminProfile.css';
+import './css/autocomplete.css';
+import './css/notification.css';
 
 ReactDOM.render(
   <Router>

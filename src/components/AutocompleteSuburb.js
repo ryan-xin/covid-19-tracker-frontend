@@ -52,32 +52,36 @@ const AutocompleteSuburb = (props) => {
   if (showOptions && userInput) {
     if (filteredOptions.length) {
       optionList = (
-        <ul className="options">
-          {filteredOptions.map((optionName, index) => {
-            return (
-              <li key={optionName} onClick={handleClick}>
-                {optionName}
-              </li>
-            );
-          })}
-        </ul>
+        <div className="auto_list_outer">
+          <div className="auto_list_inner">
+            <ul className="options">
+              {filteredOptions.map((optionName, index) => {
+                return (
+                  <li key={optionName} onClick={handleClick}>
+                    {optionName}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
       );
     } else {
       optionList = (
-        <div className="no-options">
-          <em>No Option!</em>
+        <div className = "errorMessage">
+          <p>No Option!</p>
         </div>
       );
     }
   }    
     
   return(
-    <React.Fragment>
+    <div className="auto_wrapper">
       <div className="search">
         <input type="text" className="search-box" onChange={handleChange} onClick={onClick} value={preSuburb || userInput}/>
       </div>
       {optionList}
-    </React.Fragment>
+    </div>
   );
 }; // class Autocomplete
 

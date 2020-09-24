@@ -63,15 +63,26 @@ const AutocompleteLocation = (props) => {
   }, [props.preLocation])
 
   return (
-    <div className="search">
-      <input
-        value={preLocation || value}
-        onChange={handleInput}
-        onClick={onClick}
-        disabled={!ready}
-        placeholder="e.g. Shopping Mall"
-      />
-      {status === "OK" && <ul>{renderSuggestions()}</ul>}
+    <div className="auto_wrapper">
+      <div className="search">
+        <input
+          value={preLocation || value}
+          onChange={handleInput}
+          onClick={onClick}
+          disabled={!ready}
+          placeholder="e.g. Shopping Mall"
+        />
+      </div>
+      {
+        status === "OK" &&
+        <div className="auto_list_outer">
+          <div className="auto_list_inner">
+            <ul>
+              {renderSuggestions()}
+            </ul>
+          </div>
+        </div>
+      }
     </div>
   );
 }; // AutocompleteLocation

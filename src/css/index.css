@@ -62,3 +62,16 @@ textarea {
 /* html {
   overflow-y: scroll;
 } */
+
+::-webkit-scrollbar {
+  background: #ffffff;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(206, 206, 206);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(206, 206, 206);
+}

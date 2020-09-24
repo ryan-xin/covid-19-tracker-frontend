@@ -104,38 +104,52 @@ const CreateCase = (props) => {
   }; // handleSelectLocation
   
   return(
-    <div>
+    <div className = "content">
       <h1>Create New Case</h1>
       <form>
         <label>Suburb:</label>
         <AutocompleteSuburb onSelectSuburb={handleSelectSuburb}/>
         <label>Location:</label>
         <AutocompleteLocation onSelectLocation={handleSelectLocation}/>
-        <label>Day:</label>
-        <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange}/>
-        <label>Month:</label>
-        <select type="text" name="month" placeholder="e.g. January" onChange={handleChange}>
-          <option value="">Select...</option>
-          <option value="January">January</option>
-          <option value="February">February</option>
-          <option value="March">March</option>
-          <option value="April">April</option>
-          <option value="May">May</option>
-          <option value="June">June</option>
-          <option value="July">July</option>
-          <option value="August">August</option>
-          <option value="September">September</option>
-          <option value="October">October</option>
-          <option value="November">November</option>
-          <option value="December">December</option>
-        </select>
-        <label>Year:</label>
-        <input type="text" name="year" placeholder="e.g. 2020" onChange={handleChange}/>
-        <label>Start Time:</label>
-        <input type="text" name="startTime" placeholder="e.g. 11:00am" onChange={handleChange}/>
-        <label>End Time:</label>
-        <input type="text" name="endTime" placeholder="e.g. 2:00pm" onChange={handleChange}/>
-        <input type="Submit" placeholder="Create" onClick={handleCreate} />        
+        <div className="form_container">
+          <div className = "form_container_item">
+            <label>Day:</label>
+            <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange}/>
+          </div>
+          <div className = "form_container_item">
+            <label>Month:</label>
+            <select type="text" name="month" placeholder="e.g. January" onChange={handleChange}>
+              <option value="">Select...</option>
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+            </select>
+          </div>
+          <div className = "form_container_item">
+            <label>Year:</label>
+            <input type="text" name="year" placeholder="e.g. 2020" onChange={handleChange}/>
+          </div>
+        </div>
+        <div className="form_container">
+          <div className = "form_container_item" >
+            <label>Start Time:</label>
+            <input type="text" name="startTime" placeholder="e.g. 11:00am" onChange={handleChange}/>
+          </div>
+            <div className = "form_container_item" >
+            <label>End Time:</label>
+            <input type="text" name="endTime" placeholder="e.g. 2:00pm" onChange={handleChange}/>
+          </div>
+        </div>
+        <input type="Submit" class="button_primary" placeholder="Create" onClick={handleCreate} />        
       </form>
       <div className="errorMessage">
         <p>{validationErrors.blankField}</p>

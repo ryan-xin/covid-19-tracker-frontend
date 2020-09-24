@@ -63,11 +63,10 @@ const App = (props) => {
   }, []);
   
   return (
-    <div className="html">
-    <div className="body">
+    <div>
       {
       readyToRoute && (
-      <div>
+      <div className="main_wrapper">
         <Router>
           <nav>
             <div className="nav_wrapper">
@@ -121,21 +120,24 @@ const App = (props) => {
             </div>
           </footer>
           {(hasNotification && currentUser) && 
-            <div>
-              <h4>New Case:</h4>
-              <p><strong>Suburb: </strong>{newCase.suburb}</p>
-              <p><strong>Location: </strong>{newCase.location}</p>
-              <p><strong>Date: </strong>{newCase.day} {newCase.month} {newCase.year}</p>
-              <p><strong>From </strong>{newCase.startTime}<strong> to </strong>{newCase.endTime}</p>
-              <button onClick={hideNotification}>Got it.</button>
+            <div className="notification" >
+              <h3>New Case Alert</h3>
+              <p><strong>Suburb: </strong></p>
+              <h4>{newCase.suburb}</h4>
+              <p><strong>Location: </strong></p>
+              <h4>{newCase.location}</h4>
+              <p><strong>Date: </strong></p>
+              <h4>{newCase.day} {newCase.month} {newCase.year}</h4>
+              <p><strong>Time: </strong></p>
+              <h4>From {newCase.startTime} to {newCase.endTime}</h4>
+              <span className="button_fourth" onClick={hideNotification}>Got it.</span>
             </div>
           }
         </Router>
       </div>
       )
       }
-    </div>
-    </div>
+    </div>  
   ) // return
 }; // App
 
