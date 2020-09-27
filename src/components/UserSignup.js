@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { isEmail } from 'validator';
+import {isEmail} from 'validator';
 import AutocompleteSuburb from './AutocompleteSuburb';
 
 const UserSignup = (props) => {
@@ -26,7 +26,7 @@ const UserSignup = (props) => {
   const handleChange = (e) => {
     const value = e.target.value;
     setForm({...form, [e.target.name]: value})
-  };
+  }; // handleChange
   
   const handleSelectSuburb = (suburb) => {
     setForm({...form, suburb: suburb});
@@ -89,7 +89,7 @@ const UserSignup = (props) => {
           setValidationErrors({existingEmail: err.response.data.email});
         }
       }); // axios.post
-    }
+    } // if
   }; // handleSignup
   
   return(

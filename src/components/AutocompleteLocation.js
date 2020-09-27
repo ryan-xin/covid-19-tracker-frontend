@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import usePlacesAutocomplete, {getGeocode, getLatLng} from "use-places-autocomplete";
-import axios from 'axios';
-
-// AIzaSyBjEpuJyAC9GNXxNkUK0YgathZrvdRjndk
 
 const AutocompleteLocation = (props) => {
   
@@ -22,7 +19,7 @@ const AutocompleteLocation = (props) => {
 
   const handleInput = (e) => {
     setValue(e.target.value);
-  };
+  }; // handleInput
 
   const handleSelect = ({ description }) => () => {
     setValue(description, false);
@@ -38,7 +35,7 @@ const AutocompleteLocation = (props) => {
     .catch((error) => {
       console.log("Error: ", error);
     });
-  };
+  }; // handleSelect
   
   const renderSuggestions = () =>
     data.map((suggestion) => {
@@ -46,21 +43,20 @@ const AutocompleteLocation = (props) => {
         id,
         structured_formatting: { main_text, secondary_text },
       } = suggestion;
-
     return (
       <li key={id} onClick={handleSelect(suggestion)}>
         <strong>{main_text}</strong> <small>{secondary_text}</small>
       </li>
     );
-  });
+  }); // renderSuggestions
 
   const onClick = (e) => {
     setPreLocation('');
-  }
+  }; // onClick
   
   useEffect(() => {
     setPreLocation(props.preLocation);
-  }, [props.preLocation])
+  }, [props.preLocation]); // useEffect
 
   return (
     <div className="auto_wrapper">
@@ -84,7 +80,7 @@ const AutocompleteLocation = (props) => {
         </div>
       }
     </div>
-  );
+  ); // return
 }; // AutocompleteLocation
 
 export default AutocompleteLocation;

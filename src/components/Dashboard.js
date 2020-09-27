@@ -19,9 +19,9 @@ const Dashboard = (props) => {
   const [showThankYou, setShowThankYou] = useState(false);
   // const [showThankYou, setShowThankYou] = useState(true);
   
-  const handleThankYou = () =>{
+  const handleThankYou = (e) =>{
     setShowThankYou(false);
-  };
+  }; // handleThankYou
   
   useEffect(() => {
     axios.get(WORLD_CASE_DATA_URL)
@@ -43,11 +43,11 @@ const Dashboard = (props) => {
     .catch(err => {
       console.log(err);
     })
-  }, []);
+  }, []); // useEffect
   
   const numberFormat = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
+  }; // numberFormat
   
   return(
     <div>
@@ -89,7 +89,7 @@ const Dashboard = (props) => {
       </div>
     </div>
     </div>
-  );
-};
+  ); // return
+}; // Dashboard
 
 export default Dashboard;

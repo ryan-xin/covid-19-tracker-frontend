@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
 const AutocompleteSuburb = (props) => {
   
@@ -22,22 +21,22 @@ const AutocompleteSuburb = (props) => {
     setUserInput(userInput);
     setFilteredOptions(filteredOptions);
     setShowOptions(true);
-  };
+  }; // handleChange
 
   const handleClick = (e) => {
     setUserInput(e.target.innerText);
     props.onSelectSuburb(e.target.innerText);
     setFilteredOptions([]);
     setShowOptions(false);
-  };
+  }; // handleClick
   
   const onClick = (e) => {
     setPreSuburb('');
-  }
+  }; // onClick
 
   useEffect(() => {
     setPreSuburb(props.preSuburb);
-  }, [props.preSuburb])
+  }, [props.preSuburb]); // useEffect
 
   useEffect(() => {
     axios.get(ALL_SUBURBS_URL)
@@ -46,7 +45,7 @@ const AutocompleteSuburb = (props) => {
       setSuburbs(res.data);
     })
     .catch(err => console.log(err));
-  }, []);
+  }, []); // useEffect
   
   let optionList;
   if (showOptions && userInput) {
@@ -82,11 +81,7 @@ const AutocompleteSuburb = (props) => {
       </div>
       {optionList}
     </div>
-  );
+  ); // return
 }; // class Autocomplete
-
-AutocompleteSuburb.propTypes = {
-  options: PropTypes.instanceOf(Array)
-};
 
 export default AutocompleteSuburb;

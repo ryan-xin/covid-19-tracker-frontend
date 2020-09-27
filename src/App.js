@@ -7,7 +7,6 @@ import UserSignup from './components/UserSignup';
 import AdminLogin from './components/AdminLogin';
 import World from './components/World';
 import Sydney from './components/Sydney';
-import Cases from './components/Cases';
 import CreateCase from './components/CreateCase';
 import EditCase from './components/EditCase';
 import AdminProfile from './components/AdminProfile';
@@ -21,7 +20,6 @@ const App = (props) => {
   const [readyToRoute, setReadyToRoute] = useState(false);
   const [hasNotification, setHasNotification] = useState(false);
   const [newCase, setNewCase] = useState('');
-
   const history = useHistory();
   
   const logout = (e) => {
@@ -30,7 +28,7 @@ const App = (props) => {
     localStorage.removeItem('user');
     localStorage.removeItem('admin');
     localStorage.removeItem('token');
-    history.push("/user/login");
+    history.push('/user/login');
   };
   
   const hideNotification = (e) => {
@@ -40,7 +38,6 @@ const App = (props) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      console.log('Use stored token', token);
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     }
     // We have to wait for the axios header with the token to be set before any other components can load by the router, because other components might need authenticated request, so they will need the token to be in the header.
@@ -61,11 +58,10 @@ const App = (props) => {
     }); // on socket connect    
 
     socket.on('notification', data => {
-      console.log('notification', data);
       setHasNotification(true);
       setNewCase(data.case);
-    });
-  }, [localStorage.getItem('token')]);
+    }); // socket listen to 'notification' channel to show notification
+  }, []); // useEffect()
   
   return (
     <div>
@@ -105,7 +101,6 @@ const App = (props) => {
           <Route exact path='/user/signup' component={UserSignup} />
           <Route exact path='/admin/login' component={AdminLogin} />
           <PrivateRoute exact path='/admin/profile/:adminId' component={AdminProfile} />
-          <PrivateRoute exact path='/cases' component={Cases} />
           <PrivateRoute exact path='/cases/create' component={CreateCase} />
           <PrivateRoute exact path='/cases/edit/:caseId' component={EditCase} />
           <Route exact path='/thankyoutoourheros' component={ThankYou} />

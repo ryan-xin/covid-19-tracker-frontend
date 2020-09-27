@@ -1,68 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Covid-19 Tracker (Frontend)
 
-## Available Scripts 
+### Overview ###
 
-In the project directory, you can run:
+Covid-19 Tracker is a website that people can use to check updated cases around the world and new cases added by admins. It is my final project at General Assembly. It's built with React, Node.js/Express, MongoDB/Mongoose, Websocket/socket.io and libraries (e.g. ReactLeaflet, Axios, etc.).
 
-### `npm start`
+P.S. I added a "Easter Egg/Thanks" page to this website. It is only displayed when there is 0 case around the world. This page is for thanks all healthcare workers who were on the frontlines of Covid-19. Hope we are able to see that page soon.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Backend [link.](https://github.com/ryan-xin/covid-19-tracker-backend)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Here is the live [website.](https://ryan-xin.github.io/covid-19-tracker-frontend)
 
-### `npm test`
+![Screenshot of the website:](https://github.com/ryan-xin/wdywt/blob/master/app/assets/images/wdywt_01.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Main Features ###
 
-### `npm run build`
+* User login,logout and signup;
+* Users check cases around the world based on countries;
+* Users check total cases of the world;
+* Users check new cases added by admin nearby;
+* Admin login,logout;
+* Admins create, update and delete new cases;
+* Users get notification when new case added;
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Unfixed Bugs ###
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* Not mobile responsive;
+* Form day/month/year not aligned;
+* Password field shows password;
+* Highlight invalid form fields;
+* Filter Australia suburbs everytime when open the page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Tech Used ###
 
-### `npm run eject`
+React; JavaScript; Node.js/Express; MongoDB/Mongoose; Websocket/socket.io.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Objectives ###
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* This is my first time to use React, Node.js and MongoDB and I just got a basic idea of this tech stack, still needs more practice;
+* React has a deep learning curve compared with Rails, which I used for my last two projects. Hooks are very cool feature and easier to use, especially useEffect which makes rerender much easier; 
+* Compared with Rails ActiveRecord, MongoDB is hard to setup and easy to update, however, ActiveRecord is easy to setup and hard to update;

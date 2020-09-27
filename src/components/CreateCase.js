@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import AutocompleteSuburb from './AutocompleteSuburb';
 import AutocompleteLocation from './AutocompleteLocation';
@@ -33,7 +33,7 @@ const CreateCase = (props) => {
       ...form,
       [e.target.name]: value
     });
-  };
+  }; // handleChange
   
   const formValidation = (e) => {
     setValidationErrors({
@@ -67,7 +67,7 @@ const CreateCase = (props) => {
       setValidationErrors(errors);
     }
     return validation;
-  };
+  }; // formValidation
   
   const handleCreate = (e) => {
     e.preventDefault();
@@ -84,7 +84,6 @@ const CreateCase = (props) => {
         endTime: form.endTime,
         lat: form.lat,
         lng: form.lng,
-        // adminID: admin._id
       })
       .then(res => {
         console.log(res.data);

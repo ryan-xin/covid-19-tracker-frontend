@@ -69,7 +69,7 @@ const EditCase = (props) => {
       setValidationErrors(errors);
     }
     return validation;
-  };
+  }; // formValidation
   
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -105,10 +105,8 @@ const EditCase = (props) => {
   }; // handleSelectLocation
   
   useEffect(() => {
-    console.log(props.match.params.caseId);
     axios.get(`${SINGLE_CASE_URL}/${props.match.params.caseId}`)
     .then(res => {
-      console.log(res.data.singleCase);
       const currentCase = res.data.singleCase;
       setForm({...form, 
         suburb: currentCase.suburb,
@@ -123,7 +121,7 @@ const EditCase = (props) => {
       });      
     })
     .catch(err => console.log(err));
-  }, []);
+  }, []); // useEffect
   
   return(
     <div className = "content">
@@ -181,7 +179,6 @@ const EditCase = (props) => {
       </div>
     </div>
   ); // return
-  
 }; // EditCase
 
 export default EditCase;

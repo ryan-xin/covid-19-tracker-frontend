@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const AdminProfile = (props) => {
@@ -50,7 +50,7 @@ const AdminProfile = (props) => {
         <div></div>
       </div>
       {
-        adminCases.reverse().map(c => {
+        adminCases.map(c => {
         return (
           <div key={c._id} className="table row">
             <div>{c.suburb}</div>

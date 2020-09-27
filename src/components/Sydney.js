@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Map, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
+import { Map, Marker, TileLayer} from "react-leaflet";
 import { Icon } from "leaflet";
 import axios from 'axios';
 
@@ -53,17 +53,16 @@ const Sydney = (props) => {
       });
     })
     .catch(err => console.log(err));
-  }; 
+  }; // handleClick
   
   // TODO: trigger rerender
   useEffect(() => {
     axios.get(ALL_CASES_URL)
     .then(res => {
-      console.log(res.data);
       setCases(res.data);
     })
     .catch(err => console.log(err)); // axios get cases
-  }, [cases.length])
+  }, [cases.length]); // useEffect
   
   useEffect(() => {
     if (window.navigator.geolocation) {
@@ -74,7 +73,7 @@ const Sydney = (props) => {
         })
       }, console.log);
     }
-  }, []);
+  }, []); // useEffect
   
   return(
     <div>
@@ -107,7 +106,7 @@ const Sydney = (props) => {
       </div>
     </div>
     </div>
-  )
+  ); // return
 }; // Sydney
 
 export default Sydney;

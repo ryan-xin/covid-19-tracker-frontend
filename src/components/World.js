@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Map, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
+import { Map, TileLayer, GeoJSON } from "react-leaflet";
 import axios from 'axios';
 import Dashboard from './Dashboard';
 
@@ -27,6 +27,7 @@ const World = (props) => {
     .then(res => {
       console.log(res.data);
       setCases(res.data);
+      // Create an object to store country data, key is the country name, don't need to loop through the whole data
       let countryCasesPair = {};
       res.data.forEach((r) => {
         let key = r.country;
@@ -43,7 +44,7 @@ const World = (props) => {
     .catch(err => {
       console.log(err);
     }); // axios get
-  }, []);
+  }, []); // useEffect
   
   useEffect(() => {
     axios.get(COUNTRY_GEOJSON_URL)
@@ -54,7 +55,7 @@ const World = (props) => {
     .catch(err => {
       console.log(err);
     }); // axios get    
-  }, []);
+  }, []); // useEffect
   
   const getColor = (number) => {
     return number > 700000 ? '#4E1504' :
@@ -68,9 +69,10 @@ const World = (props) => {
       number > 2000 ? '#FEB351' :
       number > 1000 ? '#FECB88' :
       '#FFECD3';
-  };
+  }; // getColor
   
   const style = (countryName) => {
+    // Two different apis some country name doesn't match, if don't find the country name show data unavailable.
     if (countryCases[countryName]) {
       return {
         fillColor: getColor(countryCases[countryName].cases),
@@ -81,33 +83,34 @@ const World = (props) => {
         fillOpacity: 0.5
       };
     } else {
-        return {
-          fillColor: getColor(0),
-          weight: 1,
-          opacity: 0.6,
-          color: 'white',
-          dashArray: '3',
-          fillOpacity: 0.5
-        };
+      return {
+        fillColor: getColor(0),
+        weight: 1,
+        opacity: 0.6,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.5
+      };
     }
-  };
+  }; // style
   
   const handleMouseOver = (e) => {
     e.target.setStyle({
       weight: 2,
       fillOpacity: 0.6
     })
-  };
+  }; // handleMouseOver
 
   const handleMouseOut = (e) => {
     e.target.setStyle({
       weight: 1,
       fillOpacity: 0.5
     })
-  };
+  }; // handleMouseOut
   
   const handleClick = (e) => {
     console.log(e.sourceTarget.options.id);
+    // As it's a library no target.id. Google doc -> 'sourceTarget.option.id'
     const countryName = e.sourceTarget.options.id;
     if (countryCases[countryName]) {
       setCurrentCountry({
@@ -130,11 +133,11 @@ const World = (props) => {
         updated: 'Date unavailable'
       });
     }
-  };
+  }; // handleClick
   
   const numberFormat = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
+  }; // numberFormat
   
   return (
     <div>

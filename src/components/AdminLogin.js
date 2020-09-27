@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const AdminLogin = (props) => {
@@ -20,12 +20,11 @@ const AdminLogin = (props) => {
     localStorage.removeItem('user');
     localStorage.removeItem('admin');
     localStorage.removeItem('token');
-  };
+  }; // logout
   
   const handleLogin = (e) => {
     e.preventDefault();
     logout();
-    console.log('Login Submitted');
     axios.post(ADMIN_LOGIN_URL, {
       email: email,
       password: password
