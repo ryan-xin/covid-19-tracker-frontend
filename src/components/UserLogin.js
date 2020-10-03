@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const UserLogin = (props) => {
   
-  const USER_LOGIN_URL = 'http://localhost:1337/user/login';
+  const USER_LOGIN_URL = 'https://covid19tracker-ryan.herokuapp.com/user/login';
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

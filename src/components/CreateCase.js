@@ -5,7 +5,7 @@ import AutocompleteLocation from './AutocompleteLocation';
 
 const CreateCase = (props) => {
   
-  const CREATE_CASE_URL = 'http://localhost:1337/cases/create';
+  const CREATE_CASE_URL = 'https://covid19tracker-ryan.herokuapp.com/cases/create';
 
   const [form, setForm] = useState({
     suburb: '',

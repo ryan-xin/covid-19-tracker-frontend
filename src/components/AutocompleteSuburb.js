@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const AutocompleteSuburb = (props) => {
   
-  const ALL_SUBURBS_URL = 'http://localhost:1337/suburbs';
+  const ALL_SUBURBS_URL = 'https://covid19tracker-ryan.herokuapp.com/suburbs';
   
   const [suburbs, setSuburbs] = useState([]);
   const [userInput, setUserInput] = useState('');

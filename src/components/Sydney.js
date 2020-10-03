@@ -6,8 +6,8 @@ import axios from 'axios';
 
 const Sydney = (props) => {
   
-  const ALL_CASES_URL = 'http://localhost:1337/cases';
-  const SINGLE_CASE_URL = 'http://localhost:1337/cases';
+  const ALL_CASES_URL = 'https://covid19tracker-ryan.herokuapp.com/cases';
+  const SINGLE_CASE_URL = 'https://covid19tracker-ryan.herokuapp.com/cases';
   
   const [cases, setCases] = useState([]);
   const [currentLocation, setCurrentLocation] = useState({

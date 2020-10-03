@@ -5,8 +5,8 @@ import AutocompleteLocation from './AutocompleteLocation';
 
 const EditCase = (props) => {
   
-  const SINGLE_CASE_URL = 'http://localhost:1337/cases';
-  const EDIT_CASE_URL = 'http://localhost:1337/cases/edit';
+  const SINGLE_CASE_URL = 'https://covid19tracker-ryan.herokuapp.com/cases';
+  const EDIT_CASE_URL = 'https://covid19tracker-ryan.herokuapp.com/cases/edit';
 
   const [form, setForm] = useState({
     suburb: '',

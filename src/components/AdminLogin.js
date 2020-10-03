@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const AdminLogin = (props) => {
-  const ADMIN_LOGIN_URL = 'http://localhost:1337/admin/login';
+  const ADMIN_LOGIN_URL = 'https://covid19tracker-ryan.herokuapp.com/admin/login';
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

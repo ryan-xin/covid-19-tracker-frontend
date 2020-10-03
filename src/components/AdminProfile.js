@@ -4,8 +4,8 @@ import axios from 'axios';
 
 const AdminProfile = (props) => {
   
-  const ADMIN_CASES_URL = 'http://localhost:1337/admin/profile';
-  const CASES_DELETE_URL = 'http://localhost:1337/cases/delete';
+  const ADMIN_CASES_URL = 'https://covid19tracker-ryan.herokuapp.com/admin/profile';
+  const CASES_DELETE_URL = 'https://covid19tracker-ryan.herokuapp.com/cases/delete';
   
   const [admin, setAdmin] = useState({});
   const [adminCases, setAdminCases] = useState([]);

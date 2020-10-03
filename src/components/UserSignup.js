@@ -5,7 +5,7 @@ import AutocompleteSuburb from './AutocompleteSuburb';
 
 const UserSignup = (props) => {
   
-  const USER_SIGNUP_URL = 'http://localhost:1337/user/signup';
+  const USER_SIGNUP_URL = 'https://covid19tracker-ryan.herokuapp.com/user/signup';
   
   const [form, setForm] = useState({
     name: '',

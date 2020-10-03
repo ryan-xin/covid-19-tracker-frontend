@@ -29,11 +29,11 @@ const App = (props) => {
     localStorage.removeItem('admin');
     localStorage.removeItem('token');
     history.push('/user/login');
-  };
+  }; // logout
   
   const hideNotification = (e) => {
     setHasNotification(false);
-  };
+  }; // hideNotification
   
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -52,7 +52,7 @@ const App = (props) => {
     }
     
     // TODO: make connection when logged in
-    const socket = io('http://localhost:1337');
+    const socket = io('https://covid19tracker-ryan.herokuapp.com');
     socket.on('connect', () => {
       console.log('Websocket connection established!');
     }); // on socket connect    

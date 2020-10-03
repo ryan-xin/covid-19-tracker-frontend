@@ -6,7 +6,7 @@ import Dashboard from './Dashboard';
 const World = (props) => {
   
   const CASE_DATA_URL = "https://disease.sh/v3/covid-19/countries";
-  const COUNTRY_GEOJSON_URL = 'http://localhost:1337/countries';
+  const COUNTRY_GEOJSON_URL = 'https://covid19tracker-ryan.herokuapp.com/countries';
   
   const [cases, setCases] = useState([]);
   const [countries, setCountries] = useState([]);
