@@ -5,8 +5,8 @@ const UserLogin = (props) => {
   
   const USER_LOGIN_URL = 'https://covid19tracker-ryan.herokuapp.com/user/login';
   
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('andy@ga.co');
+  const [password, setPassword] = useState('chicken');
   const [errorMessage, setErrorMessage] = useState('');
   
   const handleEmailInput = (e) => {
@@ -52,9 +52,9 @@ const UserLogin = (props) => {
       <h1>User Login</h1>
       <form>
         <label>Email:</label>
-        <input type="text" onChange={handleEmailInput}/>
+        <input type="text" defaultValue="andy@ga.co" onChange={handleEmailInput}/>
         <label>Password:</label>
-        <input type="text" onChange={handlePasswordInput}/>
+        <input type="password" defaultValue="chicken" onChange={handlePasswordInput}/>
         <input type="Submit" placeholder="Login" className="button_primary" onClick={handleLogin} />
       </form>
       <div className="errorMessage">

@@ -4,8 +4,8 @@ import axios from 'axios';
 const AdminLogin = (props) => {
   const ADMIN_LOGIN_URL = 'https://covid19tracker-ryan.herokuapp.com/admin/login';
   
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('ryan@ga.co');
+  const [password, setPassword] = useState('chicken');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleEmailInput = (e) => {
@@ -50,9 +50,9 @@ const AdminLogin = (props) => {
       <h1>Admin Login</h1>
       <form>
         <label>Email:</label>
-        <input type="text" onChange={handleEmailInput}/>
+        <input type="text" defaultValue="ryan@ga.co" onChange={handleEmailInput}/>
         <label>Password:</label>
-        <input type="text" onChange={handlePasswordInput}/>
+        <input type="password" defaultValue="chicken" onChange={handlePasswordInput}/>
         <input type="Submit" placeholder="Login" className="button_primary" onClick={handleLogin} />
       </form>
       <div className="errorMessage">
