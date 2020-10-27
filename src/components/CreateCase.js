@@ -2,11 +2,14 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import AutocompleteSuburb from './AutocompleteSuburb';
 import AutocompleteLocation from './AutocompleteLocation';
+import { Link } from 'react-router-dom';
 
 const CreateCase = (props) => {
   
   const CREATE_CASE_URL = 'https://covid19tracker-ryan.herokuapp.com/cases/create';
 
+  const admin = JSON.parse(localStorage.getItem('admin'));
+  
   const [form, setForm] = useState({
     suburb: '',
     location: '',
@@ -72,7 +75,6 @@ const CreateCase = (props) => {
   const handleCreate = (e) => {
     e.preventDefault();
     console.log('Case create submitted');
-    // const admin = JSON.parse(localStorage.getItem('admin'));
     if (formValidation()) {
       axios.post(CREATE_CASE_URL, {
         suburb: form.suburb,
@@ -87,7 +89,6 @@ const CreateCase = (props) => {
       })
       .then(res => {
         console.log(res.data);
-        const admin = JSON.parse(localStorage.getItem('admin'));
         props.history.push(`/admin/profile/${admin._id}`);
       })
       .catch(err => console.log(err)); // axios post
@@ -148,7 +149,8 @@ const CreateCase = (props) => {
             <input type="text" name="endTime" placeholder="e.g. 2:00pm" onChange={handleChange}/>
           </div>
         </div>
-        <input type="Submit" class="button_primary" placeholder="Create" onClick={handleCreate} />        
+        <input type="Submit" class="button_primary" placeholder="Create" onClick={handleCreate} />
+        <Link className="button_third" to={`/admin/profile/${admin._id}`}><p>Cancel</p></Link>
       </form>
       <div className="errorMessage">
         <p>{validationErrors.blankField}</p>

@@ -64,6 +64,7 @@ select {
   margin-bottom: 5px;
   flex-basis: 0;
 }
+
 .form_container_item {
   flex: auto;
   margin-right: 15px;

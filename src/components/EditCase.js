@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AutocompleteSuburb from './AutocompleteSuburb';
 import AutocompleteLocation from './AutocompleteLocation';
+import { Link } from 'react-router-dom';
 
 const EditCase = (props) => {
   
   const SINGLE_CASE_URL = 'https://covid19tracker-ryan.herokuapp.com/cases';
   const EDIT_CASE_URL = 'https://covid19tracker-ryan.herokuapp.com/cases/edit';
+  
+  const admin = JSON.parse(localStorage.getItem('admin'));
 
   const [form, setForm] = useState({
     suburb: '',
@@ -169,7 +172,8 @@ const EditCase = (props) => {
             <input type="text" name="endTime" placeholder="e.g. 2:00pm" onChange={handleChange} defaultValue={form.endTime} />
           </div>
         </div>
-        <input type="Submit" className="button_primary" placeholder="Create" onClick={handleUpdate} />        
+        <input type="Submit" className="button_primary" placeholder="Create" onClick={handleUpdate} />
+        <Link className="button_third" to={`/admin/profile/${admin._id}`}><p>Cancel</p></Link>
       </form>
       <div className="errorMessage">
         <p>{validationErrors.blankField}</p>

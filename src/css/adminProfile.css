@@ -65,6 +65,7 @@
   transition: 0.3s;
   cursor: pointer;
   font-weight: bold;
+  text-align: center;
 }
 
 .button_third:hover {
