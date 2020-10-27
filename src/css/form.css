@@ -34,7 +34,7 @@ select {
   height: 40px;
   padding: 0 15px;
   font-size: 16px;
-  margin: 15px 0 20px;
+  margin: 15px -20px 0 0;
 }
 
 .button_primary {
@@ -63,9 +63,9 @@ select {
   justify-content: space-between;
   margin-bottom: 5px;
   flex-basis: 0;
+  gap: 20px;
 }
 
 .form_container_item {
   flex: auto;
-  margin-right: 15px;
 }

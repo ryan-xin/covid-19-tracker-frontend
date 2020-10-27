@@ -111,7 +111,7 @@ const CreateCase = (props) => {
         <AutocompleteSuburb onSelectSuburb={handleSelectSuburb}/>
         <label>Location:</label>
         <AutocompleteLocation onSelectLocation={handleSelectLocation}/>
-        <div className="form_container">
+        <div className = "form_container">
           <div className = "form_container_item">
             <label>Day:</label>
             <input type="text" name="day" placeholder="e.g. 11" onChange={handleChange}/>
